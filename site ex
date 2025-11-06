@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>cinemust</title>
+</head>
+<body>
+  <h1>Bienvenue dans l'endroit qui fou fera rêver</h1>
+  <p>top 10:</p>
+
+  <button id="actionBtn" type="button">Cliquez-moi</button>
+  <div id="message" aria-live="polite" style="margin-top:10px;color:black,white,pink"></div>
+
+  <script>
+    // code minimal : affiche un message quand on clique
+    const btn = document.getElementById('actionBtn');
+    const msg = document.getElementById('message');
+
+    btn.onclick = function () {
+      msg.textContent = 'Bouton cliqué';
+      // efface le message après 3 // secondes
+      setTimeout(function () { msg.textContent = ''; }, 3000);
+    );
+    };
+  </script>
+</body>
+</html>
