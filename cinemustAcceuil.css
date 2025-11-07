@@ -1,26 +1,28 @@
-/* Style de base pour le responsive */
 * {
-    margin: 1;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    max-width: 500px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 15px;
-    background-color: #1a0d38;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+h1 {
+    font-family: "Cinzel Decorative", serif;
+    color: #d49292;
+    text-align: center;
+    margin-bottom: 50px;
 }
-
 /* Media queries de base */
 @media screen and (max-width: 768px) {
     body {
-        padding: 15px;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 24px;
     }
 }
 
@@ -28,7 +30,13 @@ img {
     body {
         padding: 5px;
     }
-
+    h1 {
+        font-size: 20px;
+    }
 }
-
-
+.image-responsive {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
