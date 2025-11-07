@@ -1,0 +1,30 @@
+/* Style de base pour le responsive */
+* {
+    margin: 1;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Media queries de base */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+}
