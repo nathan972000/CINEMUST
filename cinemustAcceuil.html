@@ -11,17 +11,38 @@
         <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 id="titre-principal">Bienvenue sur notre site</h1>
+    <h1 id="titre-principal">Bienvenue Mordu de Films</h1>
     <img id="image-responsive" src="images/Capture.155.png" alt="Description de l'image">
 
     <div id="text-box-1">
-        <h2>Titre de la section</h2>
-        <p>Votre texte ici...</p>
+        <h2>A propos de nous</h2>
+        <p>Né de la passion de cinéphiles pour le grand écran, CinéChrono rassemble les films qui ont marqué des générations. Ici, chaque spectateur peut partager ses impressions, ses souvenirs et ses coups de cœur avec la communauté</p>
     </div>
 
     <div id="text-box-2">
-        <h2>Une autre section</h2>
-        <p>Un autre texte ici...</p>
+        <h2>Introduction</h2>
+        <p>De “Taxi Driver” à “Inception”, revivez l’histoire du cinéma à travers les films qui ont façonné des générations. Découvrez, commentez, partagez vos coups de cœur.</p>
     </div>
+
+    <script>
+    // simple toggle accessible pour les h2
+    (function(){
+      const headings = document.querySelectorAll('#text-box-1 h2, #text-box-2 h2');
+      function toggle(h){
+        const parent = h.parentElement;
+        const open = parent.classList.toggle('open');
+        h.setAttribute('aria-expanded', open);
+      }
+      headings.forEach(h => {
+        h.setAttribute('tabindex','0');
+        h.setAttribute('role','button');
+        h.setAttribute('aria-expanded','false');
+        h.addEventListener('click', ()=> toggle(h));
+        h.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(h); }
+        });
+      });
+    })();
+    </script>
 </body>
 </html>
