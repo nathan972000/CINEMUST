@@ -1,8 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* Fond noir-violet et texte clair */
 body {
@@ -16,10 +12,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative; /* pour que l'image absolute soit relative au body */
+    position: relative;
 }
 
-/* Titre principal (id) */
+/* Titre principal */
 #titre-principal {
     font-family: "Cinzel Decorative", serif;
     color: #ffd6ff;
@@ -28,7 +24,7 @@ body {
     font-size: 2.2rem;
 }
 
-/* Image responsive (id) */
+/* Image en haut à gauche */
 #image-responsive {
     position: absolute;
     top: 30px;
@@ -41,8 +37,7 @@ body {
     margin: 0;
 }
 
-/* Encadrés alignés : on utilise le body comme conteneur centré,
-   et les deux encadrés ont des id distincts */
+/* Encadrés */
 #text-box-1,
 #text-box-2 {
     background: rgba(255,255,255,0.04);
@@ -51,61 +46,68 @@ body {
     box-shadow: 0 6px 20px rgba(0,0,0,0.6);
     border-left: 4px solid #9a5bd6;
     width: calc(50% - 16px);
+    max-width: 520px;
     min-width: 260px;
     color: #ececec;
     margin: 12px;
 }
 
-/* Variante accent pour le second encadré */
+/* variante */
 #text-box-2 {
     background: linear-gradient(180deg, rgba(154,91,214,0.06), rgba(255,255,255,0.02));
     border-left-color: #ff8fe6;
 }
 
-/* Titres et paragraphes à l'intérieur des encadrés */
+/* titres cliquables */
 #text-box-1 h2,
 #text-box-2 h2 {
-    margin-bottom: 10px;
+    margin: 0;
+    margin-bottom: 12px;
     font-family: "Cinzel Decorative", serif;
     color: #ffd6ff;
     font-size: 1.3rem;
+    cursor: pointer;
+    outline: none;
 }
 
+/* cacher le texte par défaut (animation max-height) */
 #text-box-1 p,
 #text-box-2 p {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    margin: 0;
     color: rgba(230,230,230,0.95);
     line-height: 1.6;
     font-size: 1rem;
 }
 
-/* Mise en page pour aligner les encadrés sur une ligne */
-@media (min-width: 700px) {
-    /* wrapper flexible simulé par body flex et marges des encadrés */
-    body { justify-content: flex-start; }
-    /* les encadrés restent côte à côte par leur largeur et marge */
+/* quand ouvert */
+#text-box-1.open p,
+#text-box-2.open p {
+    max-height: 500px; /* assez grand pour le contenu */
+    opacity: 1;
+    margin-top: 12px;
 }
 
-/* Responsive : une colonne sur écrans étroits */
+/* focus clavier */
+#text-box-1 h2:focus,
+#text-box-2 h2:focus {
+    box-shadow: 0 0 0 3px rgba(154,91,214,0.25);
+    border-radius: 6px;
+}
+
+/* responsive : empilement sur petits écrans */
 @media screen and (max-width: 768px) {
-    body { padding: 20px; padding-left: 30px; /* retire l'espace large */ }
-    #titre-principal { font-size: 2rem; }
-    #text-box-1, #text-box-2 {
-        width: 100%;
-        max-width: 700px;
-        margin: 10px 0;
-    }
-    #image-responsive {
-        position: static;
-        width: 100%;
-        max-width: 320px;
-        margin: 10px auto 24px;
-    }
+    body { padding: 20px; padding-left: 30px; }
+    #text-box-1, #text-box-2 { width: 100%; max-width: 700px; margin: 10px 0; }
+    #image-responsive { position: static; width: 100%; max-width: 320px; margin: 10px auto 24px; }
 }
 
+/* petit écran */
 @media screen and (max-width: 480px) {
     body { padding: 14px; }
     #titre-principal { font-size: 1.6rem; margin-bottom: 12px; }
     #text-box-1, #text-box-2 { padding: 14px; }
-    #text-box-1 h2, #text-box-2 h2 { font-size: 1.1rem; }
-    #text-box-1 p, #text-box-2 p { font-size: 0.95rem; }
 }
