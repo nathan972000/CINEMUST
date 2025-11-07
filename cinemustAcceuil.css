@@ -4,39 +4,108 @@
     box-sizing: border-box;
 }
 
+/* Fond noir-violet et texte clair */
 body {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px;
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px;
+    padding-left: 180px; /* espace pour l'image à gauche */
+    background: linear-gradient(180deg, #000000 0%, #3b0066 100%);
+    color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* pour que l'image absolute soit relative au body */
 }
 
-h1 {
+/* Titre principal (id) */
+#titre-principal {
     font-family: "Cinzel Decorative", serif;
-    color: #d49292;
+    color: #ffd6ff;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
 }
-/* Media queries de base */
+
+/* Image responsive (id) */
+#image-responsive {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 140px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    display: block;
+    margin: 0;
+}
+
+/* Encadrés alignés : on utilise le body comme conteneur centré,
+   et les deux encadrés ont des id distincts */
+#text-box-1,
+#text-box-2 {
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    border-left: 4px solid #9a5bd6;
+    width: calc(50% - 16px);
+    min-width: 260px;
+    color: #ececec;
+    margin: 12px;
+}
+
+/* Variante accent pour le second encadré */
+#text-box-2 {
+    background: linear-gradient(180deg, rgba(154,91,214,0.06), rgba(255,255,255,0.02));
+    border-left-color: #ff8fe6;
+}
+
+/* Titres et paragraphes à l'intérieur des encadrés */
+#text-box-1 h2,
+#text-box-2 h2 {
+    margin-bottom: 10px;
+    font-family: "Cinzel Decorative", serif;
+    color: #ffd6ff;
+    font-size: 1.3rem;
+}
+
+#text-box-1 p,
+#text-box-2 p {
+    color: rgba(230,230,230,0.95);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Mise en page pour aligner les encadrés sur une ligne */
+@media (min-width: 700px) {
+    /* wrapper flexible simulé par body flex et marges des encadrés */
+    body { justify-content: flex-start; }
+    /* les encadrés restent côte à côte par leur largeur et marge */
+}
+
+/* Responsive : une colonne sur écrans étroits */
 @media screen and (max-width: 768px) {
-    body {
-        padding: 10px;
+    body { padding: 20px; padding-left: 30px; /* retire l'espace large */ }
+    #titre-principal { font-size: 2rem; }
+    #text-box-1, #text-box-2 {
+        width: 100%;
+        max-width: 700px;
+        margin: 10px 0;
     }
-    h1 {
-        font-size: 24px;
+    #image-responsive {
+        position: static;
+        width: 100%;
+        max-width: 320px;
+        margin: 10px auto 24px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    body {
-        padding: 5px;
-    }
-    h1 {
-        font-size: 20px;
-    }
-}
-.image-responsive {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    body { padding: 14px; }
+    #titre-principal { font-size: 1.6rem; margin-bottom: 12px; }
+    #text-box-1, #text-box-2 { padding: 14px; }
+    #text-box-1 h2, #text-box-2 h2 { font-size: 1.1rem; }
+    #text-box-1 p, #text-box-2 p { font-size: 0.95rem; }
 }
