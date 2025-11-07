@@ -9,6 +9,7 @@ body {
     max-width: 500px;
     margin: 0 auto;
     padding: 15px;
+    background-color: #1a0d38;
 }
 
 img {
@@ -27,4 +28,5 @@ img {
     body {
         padding: 5px;
     }
+
 }
