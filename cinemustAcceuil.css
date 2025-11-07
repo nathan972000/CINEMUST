@@ -5,7 +5,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 30px;
-    padding-left: 180px; /* espace pour l'image à gauche */
+    padding-right: 180px; /* espace pour le logo à droite */
     background: linear-gradient(180deg, #000000 0%, #3b0066 100%);
     color: #f2f2f2;
     font-family: Arial, sans-serif;
@@ -35,6 +35,18 @@ body {
     box-shadow: 0 8px 24px rgba(0,0,0,0.6);
     display: block;
     margin: 0;
+}
+
+/* Image en haut à droite */
+#image-secondaire {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 72px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    z-index: 20;
 }
 
 /* Encadrés */
@@ -100,9 +112,10 @@ body {
 
 /* responsive : empilement sur petits écrans */
 @media screen and (max-width: 768px) {
-    body { padding: 20px; padding-left: 30px; }
+    body { padding: 20px; padding-left: 30px; padding-right: 30px; }
     #text-box-1, #text-box-2 { width: 100%; max-width: 700px; margin: 10px 0; }
     #image-responsive { position: static; width: 100%; max-width: 320px; margin: 10px auto 24px; }
+    #image-secondaire { position: static; display: block; width: 120px; margin: 10px auto 18px; }
 }
 
 /* petit écran */
