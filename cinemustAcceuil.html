@@ -37,34 +37,15 @@
     </div>
    </form>
 
-    <div id="text-box-1"> <!-- # Première boîte de texte -->
-        <h2>A propos de nous</h2> <!-- # Titre cliquable -->
-        <p>Passion ciné, partage de films et souvenirs.</p> <!-- # Texte affiché au clic -->
+    <div id="text-box-1" class="open"> <!-- # Première boîte ouverte par défaut -->
+        <h2 aria-expanded="true">A propos de nous</h2>
+        <p>Passion ciné, partage de films et souvenirs.</p>
     </div>
 
-    <div id="text-box-2"> <!-- # Deuxième boîte de texte -->
-        <h2>Introduction</h2> <!-- # Titre cliquable -->
-        <p>Revivez l'histoire du cinéma et partagez vos coups de cœur.</p> <!-- # Texte affiché au clic -->
+    <div id="text-box-2" class="open"> <!-- # Deuxième boîte ouverte par défaut -->
+        <h2 aria-expanded="true">Introduction</h2>
+        <p>Revivez l'histoire du cinéma et partagez vos coups de cœur.</p>
     </div>
 
-    <script> <!-- # Script pour ouvrir/fermer les textes des boîtes -->
-    (function(){
-      const headings = document.querySelectorAll('#text-box-1 h2, #text-box-2 h2'); // # Récupère tous les titres h2
-      function toggle(h){
-        const parent = h.parentElement; // # Boîte parente du titre
-        const open = parent.classList.toggle('open'); // # Ajoute ou enlève la classe "open" pour afficher/masquer le texte
-        h.setAttribute('aria-expanded', open); // # Met à jour l'état pour l’accessibilité
-      }
-      headings.forEach(h => {
-        h.setAttribute('tabindex','0'); // # Rend le titre sélectionnable au clavier
-        h.setAttribute('role','button'); // # Indique que le titre se comporte comme un bouton
-        h.setAttribute('aria-expanded','false'); // # État initial = fermé
-        h.addEventListener('click', ()=> toggle(h)); // # Ouvre/ferme au clic
-        h.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(h); } // # Ouvre/ferme avec Entrée ou Espace
-        });
-      });
-    })();
-    </script>
 </body>
 </html>
