@@ -1,126 +1,99 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; } 
+/* # réinitialise toutes les marges et paddings, et fait que la taille des boîtes inclut le padding et la bordure */
 
-/* Fond noir-violet et texte clair */
-body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 30px;
-    padding-right: 180px; /* espace pour le logo à droite */
-    background: linear-gradient(180deg, #000000 0%, #3b0066 100%);
-    color: #f2f2f2;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+body { 
+    min-height: 100vh; /* # occupe toute la hauteur de l’écran */
+    margin: 0; padding: 30px; padding-left: 180px; /* # espace autour du contenu, plus à gauche pour l'image */
+    background: linear-gradient(180deg, #000000 0%, #3b0066 100%); /* # fond dégradé noir -> violet */
+    color: #f2f2f2; font-family: Arial, sans-serif; /* # texte clair, police par défaut */
+    display: flex; flex-direction: column; align-items: center; /* # organise verticalement et centre horizontalement */
+    position: relative; /* # pour que les éléments absolus (ex: image) se positionnent par rapport au body */
 }
 
-/* Titre principal */
 #titre-principal {
-    font-family: "Cinzel Decorative", serif;
-    color: #ffd6ff;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.2rem;
+    font-family: "Cinzel Decorative", serif; color: #ffd6ff; /* # police et couleur du titre */
+    text-align: center; margin-bottom: 30px; font-size: 2.2rem; /* # centré, espace dessous, taille du titre */
 }
 
-/* Image en haut à gauche */
 #image-responsive {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    width: 140px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    position: absolute; top: 20px; right: 30px; width: 100px; height: auto; /* # image en haut à droite */
+    border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); display: block; margin: 0; /* # coins arrondis, ombre, bloc */
+}
+
+#maRecherche {
+    padding: 20px 36px;               /* # espace interne important */
+    border-radius: 25px;              /* # arrondi prononcé */
+    font-size: 1.5rem;                /* # texte plus gros */
+    width: min(920px, 95%);           /* # large mais responsive */
+    max-width: 920px;
+    background-color: rgba(255,255,255,0.08); /* # fond clair mais transparent */
+    color: #f2f2f2;                   /* # texte clair */
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.32); /* # légère ombre à l'intérieur */
+    transition: box-shadow .18s ease, transform .08s ease; /* # animation au focus/clic */
     display: block;
-    margin: 0;
+    line-height: 1.2;
 }
 
-/* Image en haut à droite */
-#image-secondaire {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    width: 72px;
-    height: auto;
-    border-radius: 6px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-    z-index: 20;
+button {
+    padding: 20px 20px;
+    border-radius: 50px; /* # bouton rond */
+    border: none;
+    background-color: rgba(255,255,255,0.08); /* # même fond clair transparent que la barre */
+    color: white; /* # texte clair */
+    cursor: pointer; /* # curseur main au survol */
+    margin-left: 8px; /* # petit espace entre barre et bouton */
+    font-size: 1.4rem;
 }
 
-/* Encadrés */
-#text-box-1,
-#text-box-2 {
-    background: rgba(255,255,255,0.04);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-    border-left: 4px solid #9a5bd6;
-    width: calc(50% - 16px);
-    max-width: 520px;
-    min-width: 260px;
-    color: #ececec;
-    margin: 12px;
+button:hover {
+    background-color: #9a5bd6; /* # couleur violette au survol */
 }
 
-/* variante */
-#text-box-2 {
-    background: linear-gradient(180deg, rgba(154,91,214,0.06), rgba(255,255,255,0.02));
-    border-left-color: #ff8fe6;
+form { width: 100%; display:flex; justify-content:center; } 
+/* # centre le formulaire horizontalement et force sa largeur */
+
+form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:center; } 
+/* # aligne barre + bouton, espace entre eux, largeur max responsive */
+
+#text-box-1, #text-box-2 {
+    background: rgba(255,255,255,0.04); border-radius: 10px; padding: 20px; /* # boîtes arrondies, semi-transparentes */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6); border-left: 4px solid #9a5bd6; /* # ombre et bande violette à gauche */
+    width: calc(50% - 16px); max-width: 520px; min-width: 260px; margin: 12px; color: #ececec; /* # taille et couleur du texte */
 }
 
-/* titres cliquables */
-#text-box-1 h2,
-#text-box-2 h2 {
-    margin: 0;
-    margin-bottom: 12px;
-    font-family: "Cinzel Decorative", serif;
-    color: #ffd6ff;
-    font-size: 1.3rem;
-    cursor: pointer;
-    outline: none;
+#text-box-2 { 
+    background: linear-gradient(180deg, rgba(154,91,214,0.06), rgba(255,255,255,0.02)); 
+    border-left-color: #ff8fe6; /* # variante couleur pour la 2e boîte */
 }
 
-/* cacher le texte par défaut (animation max-height) */
-#text-box-1 p,
-#text-box-2 p {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.35s ease, opacity 0.25s ease;
-    margin: 0;
-    color: rgba(230,230,230,0.95);
-    line-height: 1.6;
-    font-size: 1rem;
+#text-box-1 h2, #text-box-2 h2 {
+    margin: 0 0 12px 0; font-family: "Cinzel Decorative", serif; color: #ffd6ff; font-size: 1.3rem; 
+    cursor: pointer; outline: none; /* # titres cliquables, pas de contour par défaut */
 }
 
-/* quand ouvert */
-#text-box-1.open p,
-#text-box-2.open p {
-    max-height: 500px; /* assez grand pour le contenu */
-    opacity: 1;
-    margin-top: 12px;
+#text-box-1 p, #text-box-2 p {
+    max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.35s ease, opacity 0.25s ease; 
+    margin: 0; color: rgba(230,230,230,0.95); line-height: 1.6; font-size: 1rem; /* # texte caché par défaut */
 }
 
-/* focus clavier */
-#text-box-1 h2:focus,
-#text-box-2 h2:focus {
-    box-shadow: 0 0 0 3px rgba(154,91,214,0.25);
-    border-radius: 6px;
+#text-box-1.open p, #text-box-2.open p {
+    max-height: 500px; opacity: 1; margin-top: 12px; /* # texte visible quand on clique sur le titre */
 }
 
-/* responsive : empilement sur petits écrans */
+#text-box-1 h2:focus, #text-box-2 h2:focus {
+    box-shadow: 0 0 0 3px rgba(154,91,214,0.25); border-radius: 6px; /* # halo pour clavier/focus */
+}
+
+/* responsive pour tablettes */
 @media screen and (max-width: 768px) {
-    body { padding: 20px; padding-left: 30px; padding-right: 30px; }
-    #text-box-1, #text-box-2 { width: 100%; max-width: 700px; margin: 10px 0; }
+    body { padding: 20px 30px; } 
+    #text-box-1, #text-box-2 { width: 100%; max-width: 700px; margin: 10px 0; } 
     #image-responsive { position: static; width: 100%; max-width: 320px; margin: 10px auto 24px; }
-    #image-secondaire { position: static; display: block; width: 120px; margin: 10px auto 18px; }
 }
 
-/* petit écran */
+/* responsive pour petits écrans */
 @media screen and (max-width: 480px) {
-    body { padding: 14px; }
-    #titre-principal { font-size: 1.6rem; margin-bottom: 12px; }
+    body { padding: 14px; } 
+    #titre-principal { font-size: 1.6rem; margin-bottom: 12px; } 
     #text-box-1, #text-box-2 { padding: 14px; }
 }
