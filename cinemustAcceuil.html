@@ -1,45 +1,68 @@
-<!DOCTYPE html>
-<html lang="fr" class="scroll">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cinemust</title>
-    <link rel="stylesheet" href="cinemustAcceuil.css">
-    <!-- Intégration police -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+<!DOCTYPE html> <!-- # indique que c'est un document HTML5 -->
+<html lang="fr" class="scroll"> <!-- # langue = français, classe "scroll" pour appliquer du style CSS si besoin -->
+<head> 
+    <meta charset="UTF-8"> <!-- # encode les caractères spéciaux et accents correctement -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- # rend la page responsive (adaptée aux mobiles) -->
+    <title>cinemust</title> <!-- # titre de la page affiché dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="cinemustAcceuil.css"> <!-- # lien vers le fichier CSS externe pour la mise en page -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- # préparation de la connexion à Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- # optimisation pour charger les polices Google plus vite -->
+    <!-- Police uniforme et élégante -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet"> <!-- # importe les polices Montserrat et Lato depuis Google Fonts -->
+
+    <style>
+      body{
+        font-family: 'Lato', sans-serif; /* # police principale du site pour le texte courant */
+      }
+      #titre-principal{
+        font-family: 'Montserrat', sans-serif; /* # police du titre plus stylée */
+        font-size: 48px; /* # taille du titre principal */
+        font-weight: 900; /* # gras très prononcé pour le titre */
+        letter-spacing: 1px; /* # espace entre les lettres du titre */
+      }
+      h2{
+        font-family: 'Montserrat', sans-serif; /* # police des sous-titres */
+        font-weight: 700; /* # sous-titres un peu gras */
+      }
+    </style>
 </head>
-<body>
-    <h1 id="titre-principal">Bienvenue Mordu de Films</h1>
-    <img src="Capture.155.PNG" alt="Description de l'image" id="image-secondaire">
+<body> 
+    <h1 id="titre-principal">Bienvenue aux mordus de films</h1> <!-- # titre principal affiché en grand sur la page -->
 
-    <div id="text-box-1">
-        <h2>A propos de nous</h2>
-        <p>Né de la passion de cinéphiles pour le grand écran, CinéChrono rassemble les films qui ont marqué des générations. Ici, chaque spectateur peut partager ses impressions, ses souvenirs et ses coups de cœur avec la communauté</p>
+    <img src="Capture.155.PNG" alt="Description de l'image" id="image-responsive"> <!-- # image placée en haut à droite (petite illustration) -->
+
+   <form> <!-- # formulaire pour la barre de recherche -->
+    <div> <!-- # conteneur pour aligner la barre et le bouton -->
+      <input type="search" id="maRecherche" name="q" placeholder="Quel film voudrais-tu rechercher ?" /> <!-- # champ de recherche avec texte guide -->
+      <button type="submit">🔍</button> <!-- # bouton pour lancer la recherche -->
+    </div>
+   </form>
+
+    <div id="text-box-1"> <!-- # première boîte de texte -->
+        <h2>A propos de nous</h2> <!-- # titre cliquable pour montrer/cacher le texte -->
+        <p>Passion ciné, partage de films et souvenirs.</p> <!-- # texte caché par défaut et affiché au clic -->
     </div>
 
-    <div id="text-box-2">
-        <h2>Introduction</h2>
-        <p>De “Taxi Driver” à “Inception”, revivez l’histoire du cinéma à travers les films qui ont façonné des générations. Découvrez, commentez, partagez vos coups de cœur.</p>
+    <div id="text-box-2"> <!-- # deuxième boîte de texte -->
+        <h2>Introduction</h2> <!-- # titre cliquable -->
+        <p>Revivez l'histoire du cinéma et partagez vos coups de cœur.</p> <!-- # texte qui s'affiche quand le titre est cliqué -->
     </div>
 
-    <script>
-    // simple toggle accessible pour les h2
+    <script> <!-- # script pour rendre les titres cliquables et accessibles clavier -->
     (function(){
-      const headings = document.querySelectorAll('#text-box-1 h2, #text-box-2 h2');
+      const headings = document.querySelectorAll('#text-box-1 h2, #text-box-2 h2'); // # récupère tous les h2 dans les boîtes
       function toggle(h){
-        const parent = h.parentElement;
-        const open = parent.classList.toggle('open');
-        h.setAttribute('aria-expanded', open);
+        const parent = h.parentElement; // # récupère la boîte parente du titre
+        const open = parent.classList.toggle('open'); // # ajoute/enlève la classe "open" pour afficher/masquer le texte
+        h.setAttribute('aria-expanded', open); // # met à jour l'attribut pour l'accessibilité
       }
       headings.forEach(h => {
-        h.setAttribute('tabindex','0');
-        h.setAttribute('role','button');
-        h.setAttribute('aria-expanded','false');
-        h.addEventListener('click', ()=> toggle(h));
+        h.setAttribute('tabindex','0'); // # rend le titre focusable au clavier
+        h.setAttribute('role','button'); // # indique que le titre se comporte comme un bouton
+        h.setAttribute('aria-expanded','false'); // # état initial = fermé
+        h.addEventListener('click', ()=> toggle(h)); // # clique pour ouvrir/fermer le texte
         h.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(h); }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(h); } // # ouverture/fermeture avec Entrée ou Espace
         });
       });
     })();
