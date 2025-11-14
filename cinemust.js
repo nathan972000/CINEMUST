@@ -47,6 +47,6 @@ searchMovies('The Matrix').then(results => {
         e.preventDefault();
         toggle(h); // Ouvre/ferme avec Entrée ou Espace
       }
-    });
+    }); 
   });
 })();
