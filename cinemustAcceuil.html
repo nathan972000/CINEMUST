@@ -28,7 +28,7 @@
 <body> 
     <h1 id="titre-principal">Bienvenue aux mordus de films</h1> <!-- # Titre principal affiché sur la page -->
 
-    <img src="Capture.155.PNG" alt="Description de l'image" id="image-responsive"> <!-- # Image en haut à droite -->
+    <img src="Icons/Cinemust.png" alt="Description de l'image" id="image-responsive"> <!-- # Image en haut à droite -->
 
    <form action="results.html" method="get"> <!-- # Formulaire pour rechercher un film, envoie vers results.html -->
     <div> <!-- # Conteneur pour aligner la barre et le bouton -->
@@ -37,15 +37,18 @@
     </div>
    </form>
 
-    <div id="text-box-1" class="open"> <!-- # Première boîte ouverte par défaut -->
+    <div id="text-box-1" class="close"> <!-- # Première boîte ouverte par défaut -->
         <h2 aria-expanded="true">A propos de nous</h2>
         <p>Passion ciné, partage de films et souvenirs.</p>
     </div>
 
-    <div id="text-box-2" class="open"> <!-- # Deuxième boîte ouverte par défaut -->
+    <div id="text-box-2" class="close"> <!-- # Deuxième boîte ouverte par défaut -->
         <h2 aria-expanded="true">Introduction</h2>
         <p>Revivez l'histoire du cinéma et partagez vos coups de cœur.</p>
     </div>
 
+
+    <!-- Lier le fichier JS (même dossier) -->
+    <script src="cinemust.js" defer></script>
 </body>
 </html>
