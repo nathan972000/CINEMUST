@@ -22,17 +22,40 @@
     </style>
 </head>
 <body> 
+    <img id="image-responsive" src="images/logo.png" alt="Logo">
+    <button id="menu-dots" aria-label="Ouvrir menu">
+        <span id="dot-1"></span>
+        <span id="dot-2"></span>
+        <span id="dot-3"></span>
+    </button>
+
+    <aside id="side-panel" role="dialog" aria-hidden="true" aria-labelledby="side-panel-title">
+        <button id="side-panel-close" aria-label="Fermer panneau">×</button>
+        <div id="side-panel-content">
+            <h3 id="side-panel-title">Menu</h3>
+
+            <h4 id="link-intro" role="button" tabindex="0">Introduction</h4>
+            <div id="content-intro" aria-hidden="true">
+                <p>Texte d'introduction — cliquez pour développer/fermer.</p>
+            </div>
+
+            <h4 id="link-about" role="button" tabindex="0">À propos de nous</h4>
+            <div id="content-about" aria-hidden="true">
+                <p>Texte "à propos de nous" — cliquez pour développer/fermer.</p>
+            </div>
+        </div>
+    </aside>
+
     <h1 id="titre-principal">Bienvenue aux mordus de films</h1> <!-- # Titre principal affiché sur la page -->
 
-    <img src="Icons/Cinemust.png" alt="Description de l'image" id="image-responsive"> <!-- # Image en haut à droite -->
-
-   <form action="results.html" method="get"> <!-- # Formulaire pour rechercher un film, envoie vers results.html -->
+    <form action="results.html" method="get"> <!-- # Formulaire pour rechercher un film, envoie vers results.html -->
     <div> <!-- # Conteneur pour aligner la barre et le bouton -->
       <input type="search" id="maRecherche" name="q" placeholder="Quel film voudrais-tu rechercher ?" /> <!-- # Barre de recherche avec texte guide -->
       <button id="search-button" type="submit" aria-label="Rechercher">🔍</button> <!-- # Bouton pour lancer la recherche -->
     </div>
    </form>
-     <div class="splide" id="slider-films">
+
+   <div class="splide" id="slider-films">
         <div class="splide__track">
         <ul class="splide__list">
        <li class="splide__slide"><img src="film1.jpg" alt="Film 1"></li>
@@ -59,5 +82,51 @@
     },
   }).mount(window.splide.Extensions);
 </script>
+<script>
+    // toggle du panneau latéral et des sous-sections
+    (function(){
+      const menu = document.getElementById('menu-dots');
+      const panel = document.getElementById('side-panel');
+      const closeBtn = document.getElementById('side-panel-close');
+
+      function openPanel(){
+        panel.setAttribute('data-open','true');
+        panel.setAttribute('aria-hidden','false');
+        menu.setAttribute('aria-expanded','true');
+      }
+      function closePanel(){
+        panel.removeAttribute('data-open');
+        panel.setAttribute('aria-hidden','true');
+        menu.setAttribute('aria-expanded','false');
+      }
+
+      menu.addEventListener('click', e => {
+        if (panel.hasAttribute('data-open')) closePanel(); else openPanel();
+      });
+      closeBtn.addEventListener('click', closePanel);
+
+      // fermer en cliquant en dehors
+      document.addEventListener('click', e => {
+        if (!panel.hasAttribute('data-open')) return;
+        if (panel.contains(e.target) || menu.contains(e.target)) return;
+        closePanel();
+      });
+
+      // toggles internes pour Introduction / A propos
+      function makeToggle(linkId, contentId){
+        const link = document.getElementById(linkId);
+        const content = document.getElementById(contentId);
+        function toggle(){
+          const open = content.getAttribute('data-open') === 'true';
+          content.setAttribute('data-open', !open);
+          content.setAttribute('aria-hidden', open ? 'true' : 'false');
+        }
+        link.addEventListener('click', toggle);
+        link.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }});
+      }
+      makeToggle('link-intro','content-intro');
+      makeToggle('link-about','content-about');
+    })();
+    </script>
 </body>
 </html>
