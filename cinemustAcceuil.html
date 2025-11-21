@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- # Prépare le chargement des polices Google -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- # Optimise le chargement des polices -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet"> <!-- # Importe les polices Montserrat et Lato -->
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3/dist/css/splide.min.css"> <!-- Splide CSS -->
     <style>
   body{
     font-family: 'Lato', sans-serif;
@@ -32,21 +32,32 @@
       <button id="search-button" type="submit" aria-label="Rechercher">🔍</button> <!-- # Bouton pour lancer la recherche -->
     </div>
    </form>
-
-   <div id="boxes-container">
-    <div id="text-box-1" class="close">
-        <h2 aria-expanded="true">A propos de nous</h2>
-        <p>Passion ciné, partage de films et souvenirs.</p>
+     <div class="splide" id="slider-films">
+        <div class="splide__track">
+        <ul class="splide__list">
+       <li class="splide__slide"><img src="film1.jpg" alt="Film 1"></li>
+      <li class="splide__slide"><img src="film2.jpg" alt="Film 2"></li>
+        <li class="splide__slide"><img src="film3.jpg" alt="Film 3"></li>
+      <!-- ajoute autant de slides que tu veux -->
+     </ul>
     </div>
+  </div>
 
-    <div id="text-box-2" class="close">
-        <h2 aria-expanded="true">Introduction</h2>
-        <p>Revivez l'histoire du cinéma et partagez vos coups de cœur.</p>
-    </div>
-   </div>
-
-
+   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3/dist/js/splide.min.js"></script><!-- Splide JS -->
+   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll/dist/js/splide-extension-auto-scroll.min.js"></script><!-- Auto Scroll Extension -->
     <!-- Lier le fichier JS (même dossier) -->
     <script src="cinemust.js" defer></script>
+    <script>
+  new Splide('#slider-films', {
+    type: 'loop',
+    perPage: 10,
+    gap: '20px',
+    drag: 'free',
+    focus: 'center',
+    autoScroll: {
+      speed: 1,
+    },
+  }).mount(window.splide.Extensions);
+</script>
 </body>
 </html>
