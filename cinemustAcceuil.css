@@ -100,6 +100,18 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
     width: 100%;
 }
 
+#slider-films {
+  width: 90%;
+  margin: 150px auto; /* centre le slider horizontalement */
+}
+
+#slider-films .splide__slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
 /* responsive pour tablettes */
 @media screen and (max-width: 768px) {
     body { padding: 20px 30px; } 
