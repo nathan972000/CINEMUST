@@ -1,30 +1,3 @@
-const axios = require('axios');
-
-async function searchMovies(query) {
-  let maxRetries = 5; // Nombre max de tentatives API avant abandon
-  for (let attempt = 0; attempt < maxRetries; attempt++) {
-    try {
-      const { data } = await axios.get(`${API_URL}/search/movie`, {
-        params: { api_key: API_KEY, query }
-      });
-      return data.results;
-    } catch (error) {
-      if (attempt === maxRetries - 1) {
-        console.error(`API request failed after ${maxRetries} attempts`);
-        throw error;
-      }
-      console.warn(`API request failed, retrying...`);
-    }
-  }
-}
-
-// Exemple d'utilisation
-searchMovies('The Matrix').then(results => {
-  console.log(results);
-}).catch(error => {
-  console.error(error);
-});
-
 // Script pour ouvrir/fermer les textes des boîtes
 (function () {
   const headings = document.querySelectorAll('#text-box-1 h2, #text-box-2 h2'); // Récupère tous les titres h2
@@ -50,3 +23,24 @@ searchMovies('The Matrix').then(results => {
     }); 
   });
 })();
+
+ const axios = require('axios');
+ const API_URL = 'https://www.omdbapi.com/';
+
+ async function getMovieInfo(movieTitle, apiKey) {
+   try {
+     const response = await axios.get(API_URL, {
+       params: {
+         't': movieTitle,
+         'apikey': '1a07a3df'
+       }
+     });
+
+     return response.data;
+   } catch (error) {
+     console.error('Erreur lors de la récupération des informations du film:', error);
+     throw error;
+   }
+ }
+
+ 
