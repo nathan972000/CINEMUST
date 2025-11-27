@@ -64,8 +64,8 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
     box-shadow: 0 6px 20px rgba(0,0,0,0.6); border-left: 4px solid #9a5bd6;
     width: calc(50% - 16px); max-width: 520px; min-width: 260px; 
     margin: 12px; color: #ececec;
-    display: inline-block;   /* permet de les mettre côte à côte */
-    vertical-align: top;     /* aligne le haut des boxes */
+    display: inline-block;
+    vertical-align: top;
 }
 
 #text-box-2 { 
@@ -102,7 +102,7 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
 
 #slider-films {
   width: 90%;
-  margin: 150px auto; /* centre le slider horizontalement */
+  margin: 150px auto;
 }
 
 #slider-films .splide__list {
@@ -117,6 +117,7 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
   0%   { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
+
 #slider-films .splide__slide img {
   width: 100%;
   height: auto;
@@ -124,11 +125,10 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-/* bouton 3 points vertical en haut à droite (petits points) */
 #menu-dots{
     position: fixed;
     top: 22px;
-    left: 30px; /* placé à l'opposer du logo (ajustez si besoin) */
+    left: 30px;
     width: 30px;
     height: 35px;
     background: transparent;
@@ -142,6 +142,7 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
     padding: 4px;
     z-index: 30;
 }
+
 #menu-dots span {
     display: block;
     width: 6px;
@@ -150,7 +151,6 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
     border-radius: 50%;
 }
 
-/* panneau latéral droit (fermé par défaut) */
 #side-panel{
     position: fixed;
     top: 0;
@@ -167,12 +167,10 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
     overflow-y: auto;
 }
 
-/* quand ouvert, on utilise l'attribut data-open */
 #side-panel[data-open="true"]{
     transform: translateX(0);
 }
 
-/* close button */
 #side-panel-close{
     position: fixed;
     top: 4px;
@@ -183,17 +181,11 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
     font-size: 1.6rem;
     cursor: pointer;
     z-index: 60;
-    
 }
 
-/* contenu du panneau */
 #side-panel-content { margin-top: 48px; color: #f2f2f2; }
-#side-panel-title { margin: 0 0 12px 0; color: #ffd6ff; font-family: 'Montserrat', sans-serif; 
-    cursor: pointer; /* montre que c'est cliquable */
-    user-select: none; /* optionnel : empêche de sélectionner le texte en cliquant */
-}
+#side-panel-title { margin: 0 0 12px 0; color: #ffd6ff; font-family: 'Montserrat', sans-serif; cursor: pointer; user-select: none; }
 
-/* liens internes (h4) */
 #link-intro, #link-about {
     margin: 12px 0 6px 0;
     color: #ffd6ff;
@@ -201,7 +193,6 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
     font-weight: 700;
 }
 
-/* contenus cachés par défaut, s'affichent via data-open */
 #content-intro, #content-about {
     max-height: 0;
     overflow: hidden;
@@ -210,30 +201,85 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
     margin: 0;
     color: rgba(230,230,230,0.95);
 }
+
 #content-intro[data-open="true"], #content-about[data-open="true"] {
     max-height: 600px;
     opacity: 1;
     margin-top: 8px;
 }
 
-/* Responsive: panneau en bas/plein écran sur petits écrans */
 @media screen and (max-width: 480px){
     #menu-dots { right: 18px; top: 14px; }
-    #side-panel { width: 100%; height: 55vh; bottom: 0; top: auto; transform: translateY(100%); right: 0; border-top-left-radius: 12px; border-top-right-radius: 12px; }
+    #side-panel { width: 100%; height: 55vh; bottom: 0; top: auto; transform: translateY(100%); right: 0; 
+        border-top-left-radius: 12px; border-top-right-radius: 12px; }
     #side-panel[data-open="true"]{ transform: translateY(0); }
     #side-panel-close { left: auto; right: 12px; top: 8px; }
 }
 
-/* responsive pour tablettes */
 @media screen and (max-width: 768px) {
     body { padding: 20px 30px; } 
     #text-box-1, #text-box-2 { width: 100%; max-width: 700px; margin: 10px 0; } 
     #image-responsive { position: static; width: 100%; max-width: 320px; margin: 10px auto 24px; }
 }
 
-/* responsive pour petits écrans */
 @media screen and (max-width: 480px) {
     body { padding: 14px; } 
     #titre-principal { font-size: 1.6rem; margin-bottom: 12px; } 
     #text-box-1, #text-box-2 { padding: 14px; }
 }
+
+/* Styles pour le footer */
+footer {
+    background: linear-gradient(180deg, rgba(59,0,102,0.8), rgba(0,0,0,0.8));
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    width: 100%;
+    color: #f2f2f2;
+
+    /* ⭐ Ajout pour coller au bas de la page */
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+}
+
+footer nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #ffd6ff;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+footer nav a:hover {
+    color: #9a5bd6;
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        padding: 15px;
+    }
+    footer nav a {
+        margin: 0 5px;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    footer {
+        padding: 10px;
+    }
+    footer nav {
+        display: block;
+    }
+    footer nav a {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+
