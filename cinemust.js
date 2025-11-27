@@ -27,18 +27,9 @@
 // TMDB Top 10 films
 // --------------------
 const apiKey = "01db85cd9d534dc448cc5b69d1b2e5d3";
-const movies = [
-  "The Shawshank Redemption",
-  "The Godfather",
-  "The Dark Knight",
-  "Pulp Fiction",
-  "Forrest Gump",
-  "Inception",
-  "The Matrix",
-  "Interstellar",
-  "Gladiator",
-  "Avatar"
-];
+const movies = ["Inception","Interstellar","The Matrix","Pulp Fiction","Avatar",
+                "The Godfather","The Dark Knight","Fight Club","Forrest Gump","Gladiator",
+                "The Shawshank Redemption","Jurassic Park","Titanic","The Lion King","Avengers: Endgame"];
 
 async function fetchMovie(title) {
   const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`);
@@ -47,36 +38,76 @@ async function fetchMovie(title) {
   return null;
 }
 
-async function loadMovies() {
-  const list = document.querySelector("#slider-films .splide__list");
+  async function loadMovies() {
+    const list = document.querySelector("#slider-films .splide__list");
+    list.innerHTML = "";
 
-  // Vide la liste pour éviter les doublons
-  list.innerHTML = "";
-
-  for (const title of movies) {
-    const data = await fetchMovie(title);
-    if (data) {
-      const posterUrl = data.poster_path ? "https://image.tmdb.org/t/p/w500" + data.poster_path : "film-default.jpg";
-      const li = document.createElement("li");
-      li.classList.add("splide__slide");
-      li.innerHTML = `
-        <img src="${posterUrl}" alt="${data.title}" style="width:200px;">
-        <h3>${data.title}</h3>
-        <p>${data.release_date ? data.release_date.slice(0,4) : "N/A"}</p>
-      `;
-      list.appendChild(li);
+    for (const title of movies) {
+      const data = await fetchMovie(title);
+      if (data) {
+        const posterUrl = data.poster_path ? "https://image.tmdb.org/t/p/w500" + data.poster_path : "film-default.jpg";
+        const li = document.createElement("li");
+        li.classList.add("splide__slide");
+        li.innerHTML = `
+          <img src="${posterUrl}" alt="${data.title}" style="width:100%; border-radius:5px;">
+          <h3>${data.title}</h3>
+          <p>${data.release_date ? data.release_date.slice(0,4) : "N/A"}</p>
+        `;
+        list.appendChild(li);
+      }
     }
-  }
 
-  new Splide('#slider-films', {
-    type: 'loop',
-    perPage: 4,
-    gap: '20px',
-    drag: 'free',
-    focus: 'center',
-    autoScroll: { speed: 1 }
-  }).mount(window.splide.Extensions);
+    const splide = new Splide('#slider-films', {
+      type: 'loop',
+      perPage: 5,
+      gap: '5px',
+      drag: 'free',
+      focus: 0,
+      pagination: false,
+      arrows: true
+    })
+    splide.mount();
+      
+    
+  updateDots(0); // premier film actif par défaut
+
+  // Auto-scroll manuel
+  let currentIndex = 0;
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % movies.length;
+    splide.go(currentIndex);
+    updateDots(currentIndex);
+  }, 3000); // change de film toutes les 3 secondes
 }
 
-// **Important : on lance le slider**
+let currentIndex = 0;
+const intervalTime = 3000; // 3 secondes
+const pauseTime = 3000;    // pause à la fin
+
+function autoScrollStep() {
+  currentIndex++;
+  if (currentIndex >= movies.length) {
+    // dernière slide atteinte
+    setTimeout(() => {
+      currentIndex = 0;        // revenir au début
+      splide.go(currentIndex); // afficher la première slide
+      setTimeout(autoScrollStep, intervalTime); // relancer l’auto-scroll
+    }, pauseTime);
+  } else {
+    splide.go(currentIndex);
+    setTimeout(autoScrollStep, intervalTime);
+  }
+}
+
+// démarrer l’auto-scroll
+setTimeout(autoScrollStep, intervalTime);
 loadMovies();
+
+// rediriger vers la page d'accueil quand on clique sur "Menu"
+const menuLink = document.getElementById('side-panel-title');
+if(menuLink){
+  menuLink.style.cursor = "pointer"; // montrer que c'est cliquable
+  menuLink.addEventListener('click', () => {
+    window.location.href = "cinemustAcceuil.html"; // chemin vers la page d'accueil
+  });
+}
