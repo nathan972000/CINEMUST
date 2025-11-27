@@ -105,6 +105,18 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
   margin: 150px auto; /* centre le slider horizontalement */
 }
 
+#slider-films .splide__list {
+  animation: auto-move 10s linear infinite;
+}
+
+#slider-films .splide__list:hover {
+  animation-play-state: paused;
+}
+
+@keyframes auto-move {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
 #slider-films .splide__slide img {
   width: 100%;
   height: auto;
@@ -114,9 +126,9 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
 
 /* bouton 3 points vertical en haut à droite (petits points) */
 #menu-dots{
-    position: absolute;
+    position: fixed;
     top: 22px;
-    left: 45px; /* placé à l'opposer du logo (ajustez si besoin) */
+    left: 30px; /* placé à l'opposer du logo (ajustez si besoin) */
     width: 30px;
     height: 35px;
     background: transparent;
@@ -142,13 +154,13 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
 #side-panel{
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     height: 100vh;
     width: 340px;
     max-width: 92%;
     background: linear-gradient(180deg, rgba(20,6,32,0.98), rgba(59,0,102,0.98));
-    box-shadow: -12px 0 40px rgba(0,0,0,0.6);
-    transform: translateX(100%);
+    box-shadow: 12px 0 40px rgba(0,0,0,0.6);
+    transform: translateX(-100%);
     transition: transform 0.32s cubic-bezier(.2,.9,.2,1);
     z-index: 40;
     padding: 18px;
@@ -162,19 +174,24 @@ form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:cen
 
 /* close button */
 #side-panel-close{
-    position: absolute;
-    top: 10px;
-    left: 12px;
+    position: fixed;
+    top: 4px;
+    left: -10px;
     background: transparent;
     color: #fff;
     border: none;
     font-size: 1.6rem;
     cursor: pointer;
+    z-index: 60;
+    
 }
 
 /* contenu du panneau */
 #side-panel-content { margin-top: 48px; color: #f2f2f2; }
-#side-panel-title { margin: 0 0 12px 0; color: #ffd6ff; font-family: 'Montserrat', sans-serif; }
+#side-panel-title { margin: 0 0 12px 0; color: #ffd6ff; font-family: 'Montserrat', sans-serif; 
+    cursor: pointer; /* montre que c'est cliquable */
+    user-select: none; /* optionnel : empêche de sélectionner le texte en cliquant */
+}
 
 /* liens internes (h4) */
 #link-intro, #link-about {
