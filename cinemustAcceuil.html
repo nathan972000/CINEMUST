@@ -23,6 +23,7 @@
 </head>
 <body> 
     <img id="image-responsive" src="images/logo.png" alt="Logo">
+
     <button id="menu-dots" aria-label="Ouvrir menu">
         <span id="dot-1"></span>
         <span id="dot-2"></span>
@@ -32,7 +33,7 @@
     <aside id="side-panel" role="dialog" aria-hidden="true" aria-labelledby="side-panel-title">
         <button id="side-panel-close" aria-label="Fermer panneau">×</button>
         <div id="side-panel-content">
-            <h3 id="side-panel-title">Menu</h3>
+
 
             <h4 id="link-intro" role="button" tabindex="0">Introduction</h4>
             <div id="content-intro" aria-hidden="true">
@@ -55,33 +56,18 @@
     </div>
    </form>
 
-   <div class="splide" id="slider-films">
-        <div class="splide__track">
-        <ul class="splide__list">
-       <li class="splide__slide"><img src="film1.jpg" alt="Film 1"></li>
-      <li class="splide__slide"><img src="film2.jpg" alt="Film 2"></li>
-        <li class="splide__slide"><img src="film3.jpg" alt="Film 3"></li>
-      <!-- ajoute autant de slides que tu veux -->
-     </ul>
-    </div>
+<div aria-hidden class="splide" id="slider-films">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <!-- Les films seront ajoutés ici par le JS -->
+    </ul>
   </div>
+</div>
 
    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3/dist/js/splide.min.js"></script><!-- Splide JS -->
    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll/dist/js/splide-extension-auto-scroll.min.js"></script><!-- Auto Scroll Extension -->
     <!-- Lier le fichier JS (même dossier) -->
     <script src="cinemust.js" defer></script>
-        <script>
-  new Splide('#slider-films', {
-    type: 'loop',
-    perPage: 10,
-    gap: '20px',
-    drag: 'free',
-    focus: 'center',
-    autoScroll: {
-      speed: 1,
-    },
-  }).mount(window.splide.Extensions);
-</script>
 <script>
     // toggle du panneau latéral et des sous-sections
     (function(){
