@@ -40,6 +40,13 @@
     });
     closeBtn && closeBtn.addEventListener('click', closePanel);
 
+    const Menu = qs('#side-panel-title');
+
+      if (Menu) {
+        Menu.addEventListener('click', () => {
+      window.location.href = 'cinemustAcceuil.html'; // ou '/index.html' si ta page d’accueil est un fichier
+      });
+      }
     // fermer en cliquant dehors
     document.addEventListener('click', e => {
       if (!panel.hasAttribute('data-open')) return;
@@ -95,7 +102,7 @@
       console.error('TMDB search error', err);
       return null;
     }
-  }
+  }""
 
   // ---------- Accueil : load top films (ton tableau) and render Splide ----------
   const moviesList = [
@@ -128,7 +135,7 @@
       const li = document.createElement('li');
       li.className = 'splide__slide';
       li.innerHTML = `
-        <a href="cinemustResult.html?q=${encodeURIComponent(title)}" class="slide-link" style="text-decoration:none;color:inherit;">
+        <a href="cinemust??????.html?q=${encodeURIComponent(title)}" class="slide-link" style="text-decoration:none;color:inherit;">
           <img src="${posterUrl}" alt="${data.title}" loading="lazy">
           <h3 style="margin:6px 0 0 0; font-size:0.95rem;">${data.title}</h3>
           <p style="opacity:0.85; font-size:0.85rem; margin:4px 0 0 0;">${data.release_date ? data.release_date.slice(0,4) : "N/A"}</p>
@@ -179,7 +186,7 @@
     const posterEl = qs('#poster');
     const yearEl = qs('#movie-year');
     const plotEl = qs('#movie-plot');
-    const messageEl = qs('#message');
+    const messageEl = qs('#message');    
 
     if (!query || !query.trim()) {
       safeText(messageEl, "Aucun film spécifié.");
