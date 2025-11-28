@@ -1,113 +1,228 @@
-// Script pour ouvrir/fermer les textes des boîtes
+/* ================ cinemust.js =================
+   Gère :
+   - panneau latéral (toutes pages)
+   - toggles de sections
+   - page d'accueil : chargement TMDB + slider Splide
+   - page résultat : recherche TMDB et affichage (Option A)
+   =================================================*/
+
 (function () {
-  const headings = document.querySelectorAll('#text-box-1 h2, #text-box-2 h2');
+  // ---------- Configuration TMDB ----------
+  const TMDB_API_KEY = "01db85cd9d534dc448cc5b69d1b2e5d3";
+  const TMDB_IMG_PREFIX = "https://image.tmdb.org/t/p/w500";
 
-  function toggle(h) {
-    const parent = h.parentElement;
-    const open = parent.classList.toggle('open');
-    h.setAttribute('aria-expanded', open);
-  }
+  // ---------- Utilitaires ----------
+  function qs(sel, ctx = document) { return ctx.querySelector(sel); }
+  function qsa(sel, ctx = document) { return Array.from(ctx.querySelectorAll(sel)); }
+  function safeText(node, text) { if(node) node.textContent = text ?? ""; }
 
-  headings.forEach(h => {
-    h.setAttribute('tabindex', '0');
-    h.setAttribute('role', 'button');
-    h.setAttribute('aria-expanded', 'false');
+  // ---------- Panneau latéral commun ----------
+  function initSidePanel() {
+    const menu = qs('#menu-dots');
+    const panel = qs('#side-panel');
+    const closeBtn = qs('#side-panel-close');
 
-    h.addEventListener('click', () => toggle(h));
-    h.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle(h);
-      }
-    }); 
-  });
-})();
+    if (!menu || !panel) return;
 
-// --------------------
-// TMDB Top 10 films
-// --------------------
-const apiKey = "01db85cd9d534dc448cc5b69d1b2e5d3";
-const movies =  ["Les Évadés (The Shawshank Redemption)","interstellar","Le Voyage de Chihiro","The Dark Knight : Le Chevalier noir","The Green Mile",
-                "Parasite (기생충)","Le Seigneur des anneaux : Le Retour du roi","Your Name.","Forrest Gump","Fight Club"];
-
-                
-  async function loadMovies() {
-    const list = document.querySelector("#slider-films .splide__list");
-    list.innerHTML = "";
-
-    for (const title of movies) {
-      const data = await fetchMovie(title);
-      if (data) {
-        const posterUrl = data.poster_path ? "https://image.tmdb.org/t/p/w500" + data.poster_path : "film-default.jpg";
-        const li = document.createElement("li");
-        li.classList.add("splide__slide");
-        li.innerHTML = `
-          <img src="${posterUrl}" alt="${data.title}" style="width:100%; border-radius:5px;">
-          <h3>${data.title}</h3>
-          <p>${data.release_date ? data.release_date.slice(0,4) : "N/A"}</p>
-        `;
-        list.appendChild(li);
-      }
+    function openPanel(){
+      panel.setAttribute('data-open','true');
+      panel.setAttribute('aria-hidden','false');
+      menu.setAttribute('aria-expanded','true');
+    }
+    function closePanel(){
+      panel.removeAttribute('data-open');
+      panel.setAttribute('aria-hidden','true');
+      menu.setAttribute('aria-expanded','false');
     }
 
-    const splide = new Splide('#slider-films', {
-      type: 'loop',
-      perPage: 5,
-      gap: '5px',
-      drag: 'free',
-      focus: 0,
-      pagination: false,
-      arrows: true
-    })
-    splide.mount();
-      
-    
-  updateDots(0); // premier film actif par défaut
+    menu.addEventListener('click', () => {
+      if (panel.hasAttribute('data-open')) closePanel(); else openPanel();
+    });
+    closeBtn && closeBtn.addEventListener('click', closePanel);
 
-  // Auto-scroll manuel
-  let currentIndex = 0;
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % movies.length;
-    splide.go(currentIndex);
-    updateDots(currentIndex);
-  }, 3000); // change de film toutes les 3 secondes
-}
+    // fermer en cliquant dehors
+    document.addEventListener('click', e => {
+      if (!panel.hasAttribute('data-open')) return;
+      if (panel.contains(e.target) || menu.contains(e.target)) return;
+      closePanel();
+    });
 
-let currentIndex = 0;
-const intervalTime = 3000; // 3 secondes
-const pauseTime = 3000;    // pause à la fin
-
-function autoScrollStep() {
-  currentIndex++;
-  if (currentIndex >= movies.length) {
-    // dernière slide atteinte
-    setTimeout(() => {
-      currentIndex = 0;        // revenir au début
-      splide.go(currentIndex); // afficher la première slide
-      setTimeout(autoScrollStep, intervalTime); // relancer l’auto-scroll
-    }, pauseTime);
-  } else {
-    splide.go(currentIndex);
-    setTimeout(autoScrollStep, intervalTime);
+    // toggles internes pour Introduction / A propos
+    function makeToggle(linkId, contentId){
+      const link = qs('#' + linkId);
+      const content = qs('#' + contentId);
+      if (!link || !content) return;
+      function toggle(){
+        const open = content.getAttribute('data-open') === 'true';
+        content.setAttribute('data-open', !open);
+        content.setAttribute('aria-hidden', open ? 'true' : 'false');
+      }
+      link.addEventListener('click', toggle);
+      link.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }});
+    }
+    makeToggle('link-intro','content-intro');
+    makeToggle('link-about','content-about');
   }
-}
 
-// démarrer l’auto-scroll
-setTimeout(autoScrollStep, intervalTime);
-loadMovies();
+  // ---------- Accessible toggles pour boîtes (si présentes) ----------
+  function initBoxHeadings() {
+    const headings = qsa('#text-box-1 h2, #text-box-2 h2, .text-box h2');
+    headings.forEach(h => {
+      h.setAttribute('tabindex','0');
+      h.setAttribute('role','button');
+      h.setAttribute('aria-expanded','false');
+      function toggle() {
+        const parent = h.parentElement;
+        const open = parent.classList.toggle('open');
+        h.setAttribute('aria-expanded', open);
+      }
+      h.addEventListener('click', toggle);
+      h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }});
+    });
+  }
 
-// rediriger vers la page d'accueil quand on clique sur "Menu"
-const menuLink = document.getElementById('side-panel-title');
-if(menuLink){
-  menuLink.style.cursor = "pointer"; // montrer que c'est cliquable
-  menuLink.addEventListener('click', () => {
-    window.location.href = "cinemustAcceuil.html"; // chemin vers la page d'accueil
+  // ---------- TMDB : fetch movie by title (search) ----------
+  async function fetchMovieSearch(title) {
+    if (!title) return null;
+    try {
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&include_adult=false&language=fr-FR`;
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const json = await res.json();
+      if (json.results && json.results.length > 0) return json.results[0];
+      return null;
+    } catch (err) {
+      console.error('TMDB search error', err);
+      return null;
+    }
+  }
+
+  // ---------- Accueil : load top films (ton tableau) and render Splide ----------
+  const moviesList = [
+    "Les Évadés (The Shawshank Redemption)",
+    "Interstellar",
+    "Le Voyage de Chihiro",
+    "The Dark Knight",
+    "The Green Mile",
+    "Parasite",
+    "Le Seigneur des anneaux : Le Retour du roi",
+    "Your Name.",
+    "Forrest Gump",
+    "Fight Club"
+  ];
+
+  async function loadHomeMovies() {
+    const slider = qs('#slider-films');
+    if (!slider) return;
+
+    const listEl = qs('#slider-films .splide__list');
+    if (!listEl) return;
+
+    listEl.innerHTML = '';
+
+    const slides = [];
+    for (const title of moviesList) {
+      const data = await fetchMovieSearch(title);
+      if (!data) continue;
+      const posterUrl = data.poster_path ? (TMDB_IMG_PREFIX + data.poster_path) : 'film-default.jpg';
+      const li = document.createElement('li');
+      li.className = 'splide__slide';
+      li.innerHTML = `
+        <a href="cinemustResult.html?q=${encodeURIComponent(title)}" class="slide-link" style="text-decoration:none;color:inherit;">
+          <img src="${posterUrl}" alt="${data.title}" loading="lazy">
+          <h3 style="margin:6px 0 0 0; font-size:0.95rem;">${data.title}</h3>
+          <p style="opacity:0.85; font-size:0.85rem; margin:4px 0 0 0;">${data.release_date ? data.release_date.slice(0,4) : "N/A"}</p>
+        </a>
+      `;
+      listEl.appendChild(li);
+      slides.push(li);
+    }
+
+    // initialize Splide (only if library loaded)
+    if (window.Splide) {
+      const splide = new Splide('#slider-films', {
+        type: 'loop',
+        perPage: 5,
+        gap: '10px',
+        drag: 'free',
+        focus: 0,
+        pagination: false,
+        arrows: true,
+        breakpoints: {
+          1024: { perPage: 3 },
+          768: { perPage: 2 },
+          480: { perPage: 1 }
+        }
+      });
+      splide.mount();
+
+      // auto-scroll simple
+      let current = 0;
+      const total = slides.length || 1;
+      setInterval(() => {
+        current = (current + 1) % total;
+        splide.go(current);
+      }, 3000);
+    } else {
+      console.warn("Splide non chargé : le slider n'aura pas d'animations.");
+    }
+  }
+
+  // ---------- Page résultat : fetch premier résultat TMDB et afficher (Option A) ----------
+  async function loadResultPage() {
+    const titleEl = qs('#movie-title');
+    if (!titleEl) return; // on est pas sur la page result
+
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('q') || params.get('movie') || '';
+
+    const posterEl = qs('#poster');
+    const yearEl = qs('#movie-year');
+    const plotEl = qs('#movie-plot');
+    const messageEl = qs('#message');
+
+    if (!query || !query.trim()) {
+      safeText(messageEl, "Aucun film spécifié.");
+      return;
+    }
+
+    safeText(messageEl, "Chargement...");
+    const movie = await fetchMovieSearch(query);
+    if (!movie) {
+      safeText(messageEl, "Le film que vous avez cherché n'a pas été retrouvé.");
+      safeText(titleEl, "");
+      safeText(yearEl, "");
+      safeText(plotEl, "");
+      if (posterEl) posterEl.style.display = 'none';
+      return;
+    }
+
+    safeText(messageEl, "");
+    safeText(titleEl, movie.title || movie.name || "");
+    safeText(yearEl, movie.release_date ? "Date de sortie : " + movie.release_date : "");
+    safeText(plotEl, movie.overview || "Aucun synopsis disponible.");
+    if (posterEl) {
+      if (movie.poster_path) {
+        posterEl.src = TMDB_IMG_PREFIX + movie.poster_path;
+        posterEl.style.display = 'block';
+      } else {
+        posterEl.style.display = 'none';
+      }
+    }
+  }
+
+  // ---------- DOM ready ----------
+  document.addEventListener('DOMContentLoaded', () => {
+    initSidePanel();
+    initBoxHeadings();
+
+    // Si on est sur l'accueil, charge les slides
+    if (qs('#slider-films')) {
+      loadHomeMovies();
+    }
+
+    // Si on est sur la page résultat
+    loadResultPage();
   });
-}
 
-async function fetchMovie(title) {
-  const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`);
-  const data = await res.json();
-  if (data.results && data.results.length > 0) return data.results[0];
-  return null;
-}
+})();
