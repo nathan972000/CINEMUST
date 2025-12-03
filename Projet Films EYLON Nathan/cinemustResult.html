@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Recherche - Cinemust</title>
+  <meta charset="utf-8" /> <!-- Encodage UTF-8 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" /> <!-- Responsive design -->
+  <title>Recherche - Cinemust</title> <!-- Titre de la page -->
 
+  <!-- === CSS global du site === -->
   <link rel="stylesheet" href="cinemustAcceuil.css">
 
-  <!-- Polices Google -->
+  <!-- === Polices Google === -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Lato:wght@400;700&family=Cinzel+Decorative&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- === Logo cliquable pour retour accueil === -->
   <img id="image-responsive" src="Icons/Cinemust.png" alt="Logo">
 
+  <!-- === Bouton menu dots pour panneau latéral === -->
   <button id="menu-dots" aria-label="Ouvrir menu">
     <span id="dot-1"></span>
     <span id="dot-2"></span>
     <span id="dot-3"></span>
   </button>
 
+  <!-- === Panneau latéral / menu === -->
   <aside id="side-panel" role="dialog" aria-hidden="true" aria-labelledby="side-panel-title">
+    <!-- Bouton fermer panneau -->
     <button id="side-panel-close" aria-label="Fermer panneau">×</button>
+    
+    <!-- Contenu du panneau -->
     <div id="side-panel-content">
+      <!-- Titre du panneau -->
       <h3 id="side-panel-title">Menu</h3>
 
+      <!-- Lien vers la section introduction -->
       <h4 id="link-intro" role="button" tabindex="0">Introduction</h4>
       <div id="content-intro" aria-hidden="true">
         <p>Texte d'introduction — cliquez pour développer/fermer.</p>
       </div>
 
+      <!-- Lien vers la section à propos -->
       <h4 id="link-about" role="button" tabindex="0">À propos de nous</h4>
       <div id="content-about" aria-hidden="true">
         <p>Texte "à propos de nous" — cliquez pour développer/fermer.</p>
@@ -38,10 +49,13 @@
     </div>
   </aside>
 
+  <!-- === Titre principal de la page === -->
   <h1 id="titre-principal">Recherche du mordus de films</h1>
 
+  <!-- === Conteneur des résultats de recherche TMDB === -->
   <div id="results"></div>
 
+  <!-- === Footer avec droits et liens ressources === -->
   <footer>
     <p>&copy; 2025 Cinemust. Tous droits réservés.</p>
     <nav>
@@ -51,6 +65,7 @@
     </nav>
   </footer>
 
+  <!-- === Script JS principal pour interactions et recherche === -->
   <script src="cinemust.js" defer></script>
 </body>
 </html>
