@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Film</title>
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="cinemustAcceuil.css">
+  <!-- CSS dédié film -->
+  <link rel="stylesheet" href="cinemustFilm.css">
+
+  <!-- Polices Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Lato:wght@400;700&family=Cinzel+Decorative&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Logo -->
+  <img id="image-responsive" src="Icons/Cinemust.png" alt="Logo">
+
+  <!-- Menu dots -->
+  <button id="menu-dots" aria-label="Ouvrir menu">    
+    <span id="dot-1"></span>
+    <span id="dot-2"></span>
+    <span id="dot-3"></span>
+  </button>
+
+<aside id="side-panel" role="dialog" aria-hidden="true" aria-labelledby="side-panel-title">
+  <!-- Bouton de fermeture à l'intérieur -->
+  <button id="side-panel-close" aria-label="Fermer panneau">×</button>
+
+  <div id="side-panel-content">
+    <h2 id="side-panel-title">CineMust</h2>
+
+    <h4 id="link-intro" role="button" tabindex="0">Introduction</h4>
+    <div id="content-intro" aria-hidden="true">
+      <p>Bienvenue sur CineMust.</p>
+    </div>
+
+    <h4 id="link-about" role="button" tabindex="0">À propos</h4>
+    <div id="content-about" aria-hidden="true">
+      <p>Site de films TMDB-like.</p>
+    </div>
+  </div>
+</aside>
+
+
+  <!-- Contenu principal -->
+  <main id="film-container">
+    <div id="film-left">
+      <img id="movie-poster" src="" alt="Poster du film">
+    </div>
+    <div id="film-right">
+      <h1 id="movie-title">Titre</h1>
+      <p id="movie-note">Note :</p>
+      <p id="movie-synopsis">Synopsis :</p>
+      <div id="movie-actors"><h2>Acteurs</h2><div class="actors-list"></div></div>
+      <div id="movie-trailer-container"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CineMust</p>
+    <nav>
+      <a href="cinemustAcceuil.html">Accueil</a>
+    </nav>
+  </footer>
+
+  <!-- JS -->
+  <script src="cinemust.js"></script>
+  <script src="cinemustFilm.js"></script>
+</body>
+</html>
