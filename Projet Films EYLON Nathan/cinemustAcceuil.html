@@ -1,70 +1,70 @@
-<!DOCTYPE html>
-<html lang="fr" class="scroll">
+<!DOCTYPE html> <!-- Déclare le type de document HTML5 -->
+<html lang="fr" class="scroll"> <!-- Balise racine, langue française, classe "scroll" (peut servir au CSS ou JS) -->
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>cinemust</title>
+  <meta charset="utf-8" /> <!-- Définit l'encodage des caractères en UTF-8 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" /> <!-- Rend le site responsive sur mobile -->
+  <title>cinemust</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
 
   <!-- CSS principal -->
-  <link rel="stylesheet" href="cinemustAcceuil.css">
+  <link rel="stylesheet" href="cinemustAcceuil.css"> <!-- Feuille de style principale pour la page d'accueil -->
   <!-- CSS dédié film -->
-  <link rel="stylesheet" href="cinemustFilm.css">
+  <link rel="stylesheet" href="cinemustFilm.css"> <!-- Feuille de style spécifique aux pages films -->
 
   <!-- Polices Google -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Lato:wght@400;700&family=Cinzel+Decorative&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Optimisation du chargement des polices Google -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Optimisation avec CORS pour les polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Lato:wght@400;700&family=Cinzel+Decorative&display=swap" rel="stylesheet"> <!-- Import des polices Montserrat, Lato et Cinzel -->
 
   <!-- Splide (slider) CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3/dist/css/splide.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3/dist/css/splide.min.css"> <!-- CSS pour le slider Splide -->
 </head>
-<!-- ajout de la classe film-page -->
-<body class="film-page">
-  <img id="image-responsive" src="Icons/Cinemust.png" alt="Logo">
 
-  <button id="menu-dots" aria-label="Ouvrir menu">
-    <span id="dot-1"></span>
-    <span id="dot-2"></span>
-    <span id="dot-3"></span>
+<body class="film-page"> <!-- Corps de la page, classe "film-page" pour cibler le CSS ou JS -->
+  <img id="image-responsive" src="Icons/Cinemust.png" alt="Logo"> <!-- Logo du site cliquable via JS -->
+
+  <button id="menu-dots" aria-label="Ouvrir menu"> <!-- Bouton hamburger pour ouvrir le menu -->
+    <span id="dot-1"></span> <!-- Point 1 du menu -->
+    <span id="dot-2"></span> <!-- Point 2 du menu -->
+    <span id="dot-3"></span> <!-- Point 3 du menu -->
   </button>
 
-  <aside id="side-panel" role="dialog" aria-hidden="true" aria-labelledby="side-panel-title">
-    <button id="side-panel-close" aria-label="Fermer panneau">×</button>
+  <aside id="side-panel" role="dialog" aria-hidden="true" aria-labelledby="side-panel-title"> <!-- Panneau latéral du menu -->
+    <button id="side-panel-close" aria-label="Fermer panneau">×</button> <!-- Bouton pour fermer le panneau -->
     <div id="side-panel-content">
-      <h3 id="side-panel-title">Menu</h3>
+      <h3 id="side-panel-title">Menu</h3> <!-- Titre du menu -->
 
-      <h4 id="link-intro" role="button" tabindex="0">Introduction</h4>
-      <div id="content-intro" aria-hidden="true">
+      <h4 id="link-intro" role="button" tabindex="0">Introduction</h4> <!-- Lien ouvrant la section Introduction -->
+      <div id="content-intro" aria-hidden="true"> <!-- Contenu caché de l'introduction, affiché au clic -->
         <p>Texte d'introduction — cliquez pour développer/fermer.</p>
       </div>
 
-      <h4 id="link-about" role="button" tabindex="0">À propos de nous</h4>
-      <div id="content-about" aria-hidden="true">
+      <h4 id="link-about" role="button" tabindex="0">À propos de nous</h4> <!-- Lien ouvrant la section À propos -->
+      <div id="content-about" aria-hidden="true"> <!-- Contenu caché de À propos, affiché au clic -->
         <p>Texte "à propos de nous" — cliquez pour développer/fermer.</p>
       </div>
     </div>
   </aside>
 
-  <h1 id="titre-principal">Bienvenue aux mordus de films</h1>
+  <h1 id="titre-principal">Bienvenue aux mordus de films</h1> <!-- Titre principal de la page -->
 
-  <form action="cinemustResult.html" method="get">
+  <form action="cinemustResult.html" method="get"> <!-- Formulaire de recherche, envoie vers cinemustResult.html -->
     <div>
-      <input type="search" id="maRecherche" name="q" placeholder="Quel film voudrais-tu rechercher ?" />
-      <button id="search-button" type="submit" aria-label="Rechercher">🔍</button>
+      <input type="search" id="maRecherche" name="q" placeholder="Quel film voudrais-tu rechercher ?" /> <!-- Champ de recherche -->
+      <button id="search-button" type="submit" aria-label="Rechercher">🔍</button> <!-- Bouton de recherche -->
     </div>
   </form>
 
-  <div class="splide" id="slider-films" aria-label="Top films">
-    <div class="splide__track">
-      <ul class="splide__list">
+  <div class="splide" id="slider-films" aria-label="Top films"> <!-- Conteneur principal du slider Splide -->
+    <div class="splide__track"> <!-- Piste du slider -->
+      <ul class="splide__list"> <!-- Liste des slides, ajoutées dynamiquement via JS -->
         <!-- Slides ajoutées par JS -->
       </ul>
     </div>
   </div>
 
-  <footer>
-    <p>&copy; 2025 Cinemust. Tous droits réservés.</p>
-    <nav>
+  <footer> <!-- Pied de page -->
+    <p>&copy; 2025 Cinemust. Tous droits réservés.</p> <!-- Copyright -->
+    <nav> <!-- Liens du footer -->
       <a href="./CG.pdf" target="_blank" rel="noopener noreferrer">Charte graphique</a> |
       <a href="./cdg.pdf" target="_blank" rel="noopener noreferrer">Cahier des charges</a> |
       <a href="./D.pdf" target="_blank" rel="noopener noreferrer">Diagrammes</a>
@@ -72,7 +72,7 @@
   </footer>
 
   <!-- Splide JS (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3/dist/js/splide.min.js" defer></script>
-  <script src="cinemust.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3/dist/js/splide.min.js" defer></script> <!-- JS du slider Splide -->
+  <script src="cinemust.js" defer></script> <!-- JS principal du site -->
 </body>
 </html>
