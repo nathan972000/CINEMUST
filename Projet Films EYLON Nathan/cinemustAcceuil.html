@@ -35,17 +35,18 @@
 
       <h4 id="link-intro" role="button" tabindex="0">Introduction</h4> <!-- Lien ouvrant la section Introduction -->
       <div id="content-intro" aria-hidden="true"> <!-- Contenu caché de l'introduction, affiché au clic -->
-        <p>Texte d'introduction — cliquez pour développer/fermer.</p>
+        <p>Bienvenue sur Cinemust ! C'est un site pour trouver de bons films, un peu comme un guide simple. Au lieu de montrer tous les films du monde comme d'autres sites, nous on montre surtout les films qu'il faut absolument voir. Vous pouvez chercher un film et voir tout de suite les informations importantes (acteurs, histoire, affiche) que nous prenons de la base de données officielle.</p>
       </div>
 
       <h4 id="link-about" role="button" tabindex="0">À propos de nous</h4> <!-- Lien ouvrant la section À propos -->
       <div id="content-about" aria-hidden="true"> <!-- Contenu caché de À propos, affiché au clic -->
-        <p>Texte "à propos de nous" — cliquez pour développer/fermer.</p>
+        <p>On est des élèves du lycée Agora. Ce site, Cinemust, c'est le projet de fin d'année qu'on devait faire pour l'école. Faire ce site n'a pas été facile, vue qu'on s'y connaissait pas en codage html, css et js, et que surtout pour connecter les vraies infos de films (l'API), mais on a réussi à le finir. C'est le résultat de notre travail.. 
+        </p>
       </div>
     </div>
   </aside>
 
-  <h1 id="titre-principal">Bienvenue aux mordus de films</h1> <!-- Titre principal de la page -->
+  <h1 id="titre-principal">Cinemust</h1> <!-- Titre principal de la page -->
 
   <form action="cinemustResult.html" method="get"> <!-- Formulaire de recherche, envoie vers cinemustResult.html -->
     <div>
@@ -54,20 +55,22 @@
     </div>
   </form>
 
-  <div class="splide" id="slider-films" aria-label="Top films"> <!-- Conteneur principal du slider Splide -->
-    <div class="splide__track"> <!-- Piste du slider -->
-      <ul class="splide__list"> <!-- Liste des slides, ajoutées dynamiquement via JS -->
-        <!-- Slides ajoutées par JS -->
-      </ul>
+  <div class="splide" id="slider-films" aria-label="Top films">
+    <h2 class="top-films-title">Top 10 films :</h2>
+
+    <div class="splide__track">
+      <ul class="splide__list">
+      <!-- Slides ajoutées par JS -->
+    </ul>
     </div>
-  </div>
+    </div>
 
   <footer> <!-- Pied de page -->
     <p>&copy; 2025 Cinemust. Tous droits réservés.</p> <!-- Copyright -->
     <nav> <!-- Liens du footer -->
       <a href="./CG.pdf" target="_blank" rel="noopener noreferrer">Charte graphique</a> |
       <a href="./cdg.pdf" target="_blank" rel="noopener noreferrer">Cahier des charges</a> |
-      <a href="./D.pdf" target="_blank" rel="noopener noreferrer">Diagrammes</a>
+      <a href="./Diagrammes -2-.pdf" target="_blank" rel="noopener noreferrer">Diagrammes</a>
     </nav>
   </footer>
 
