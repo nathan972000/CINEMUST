@@ -1,14 +1,14 @@
 (function () {  
-  // IIFE pour encapsuler tout le code et éviter les variables globales
+  // IIFE : Encapsule tout le code pour éviter les variables globales
 
   const TMDB_API_KEY = "01db85cd9d534dc448cc5b69d1b2e5d3";  
-  // Clé API pour accéder à l'API TMDB
+  // Clé API TMDB pour accéder aux données des films
 
   const TMDB_IMG_PREFIX = "https://image.tmdb.org/t/p/w500";  
-  // URL de base pour récupérer les images de TMDB
+  // URL de base pour récupérer les affiches de films depuis TMDB
 
   function qs(sel, ctx = document) { return ctx.querySelector(sel); }  
-  // Raccourci pour document.querySelector
+  // Raccourci pour document.querySelector, avec contexte optionnel
 
   function qsa(sel, ctx = document) { return Array.from(ctx.querySelectorAll(sel)); }  
   // Raccourci pour document.querySelectorAll, converti en tableau
@@ -19,26 +19,26 @@
   // ---------- Panneau latéral ----------
   function initSidePanel() {  
     const menu = qs('#menu-dots');  
-    // Sélectionne le bouton du menu (les trois points)
+    // Sélection du bouton menu (les trois points)
 
     const panel = qs('#side-panel');  
-    // Sélectionne le panneau latéral
+    // Sélection du panneau latéral
 
     const closeBtn = qs('#side-panel-close');  
-    // Sélectionne le bouton pour fermer le panneau
+    // Sélection du bouton de fermeture du panneau
 
     if (!menu || !panel) return;  
-    // Si le menu ou le panneau n'existe pas, on quitte la fonction
+    // Si menu ou panneau absent -> quitter
 
     function openPanel(){  
       panel.setAttribute('data-open','true');  
-      // Attribut pour indiquer au CSS que le panneau est ouvert
+      // Indique au CSS que le panneau est ouvert
 
       panel.setAttribute('aria-hidden','false');  
-      // Accessibilité : le panneau est visible
+      // Accessibilité : panneau visible
 
       menu.setAttribute('aria-expanded','true');  
-      // Accessibilité : bouton de menu considéré comme ouvert
+      // Accessibilité : bouton considéré comme ouvert
     }  
 
     function closePanel(){  
@@ -46,26 +46,26 @@
       // Supprime l'attribut data-open
 
       panel.setAttribute('aria-hidden','true');  
-      // Accessibilité : le panneau est caché
+      // Accessibilité : panneau caché
 
       menu.setAttribute('aria-expanded','false');  
-      // Accessibilité : bouton de menu considéré comme fermé
+      // Accessibilité : bouton considéré comme fermé
     }  
 
     menu.addEventListener('click', () => {  
       panel.hasAttribute('data-open') ? closePanel() : openPanel();  
-      // Si le panneau est ouvert -> fermer, sinon -> ouvrir
+      // Clic sur menu : toggle panneau
     });  
 
     closeBtn && closeBtn.addEventListener('click', closePanel);  
-    // Si bouton close existe -> ajouter événement clic pour fermer
+    // Clic sur bouton close -> fermer panneau
 
     const Menu = qs('#side-panel-title');  
-    // Sélectionne le titre du panneau
+    // Sélection du titre du panneau
 
     if (Menu) Menu.addEventListener('click', () => {  
       window.location.href = 'cinemustAcceuil.html';  
-      // Clic sur titre -> renvoie à la page d'accueil
+      // Clic sur titre -> retour accueil
     });  
 
     document.addEventListener('click', e => {  
@@ -73,39 +73,39 @@
       // Si panneau fermé -> rien
 
       if (panel.contains(e.target) || menu.contains(e.target)) return;  
-      // Si clic dans le panneau ou sur le menu -> rien
+      // Clic dans le panneau ou sur menu -> rien
 
       closePanel();  
-      // Sinon -> fermer le panneau
+      // Sinon -> fermer panneau
     });  
 
     function makeToggle(linkId, contentId){  
       const link = qs('#' + linkId);  
-      // Sélectionne le lien de la section (ex: Introduction)
+      // Sélection du lien (ex: Introduction)
 
       const content = qs('#' + contentId);  
-      // Sélectionne le contenu correspondant
+      // Sélection du contenu associé
 
       if (!link || !content) return;  
       // Si lien ou contenu absent -> quitter
 
       function toggle(){  
         const open = content.getAttribute('data-open') === 'true';  
-        // Vérifie si la section est déjà ouverte
+        // Vérifie si la section est ouverte
 
         content.setAttribute('data-open', !open);  
-        // Bascule l'état data-open
+        // Bascule l'état ouvert/fermé
 
         content.setAttribute('aria-hidden', open ? 'true' : 'false');  
         // Accessibilité : cacher/montrer le contenu
       }  
 
       link.addEventListener('click', toggle);  
-      // Toggle au clic sur le lien
+      // Clic sur le lien -> toggle
 
       link.addEventListener('keydown', e => {  
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }  
-        // Toggle au clavier si Enter ou Espace
+        // Toggle clavier : Enter ou Espace
       });  
     }  
 
@@ -119,35 +119,35 @@
   // ---------- Toggle accessibles pour boîtes de texte ----------
   function initBoxHeadings() {  
     const headings = qsa('#text-box-1 h2, #text-box-2 h2, .text-box h2');  
-    // Sélection de tous les h2 qui doivent être interactifs
+    // Sélection de tous les h2 interactifs
 
     headings.forEach(h => {  
       h.setAttribute('tabindex','0');  
-      // Rendre le h2 focusable
+      // Rendre focusable
 
       h.setAttribute('role','button');  
-      // Indique que c'est un bouton pour accessibilité
+      // Rôle bouton pour accessibilité
 
       h.setAttribute('aria-expanded','false');  
       // État initial fermé
 
       function toggle() {  
         const parent = h.parentElement;  
-        // Récupère le parent contenant le h2
+        // Récupère parent contenant le h2
 
         const open = parent.classList.toggle('open');  
-        // Ajoute ou enlève la classe 'open'
+        // Bascule classe 'open'
 
         h.setAttribute('aria-expanded', open);  
-        // Met à jour aria-expanded pour l'accessibilité
+        // Met à jour aria-expanded
       }  
 
       h.addEventListener('click', toggle);  
-      // Clic sur le h2 -> toggle
+      // Clic -> toggle
 
       h.addEventListener('keydown', e => {  
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }  
-        // Toggle au clavier si Enter ou Espace
+        // Toggle clavier
       });  
     });  
   }  
@@ -155,72 +155,71 @@
   // ---------- Requête TMDB pour recherche ----------
   async function fetchMovieSearch(title) {  
     if (!title) return null;  
-    // Si titre vide -> retour null
+    // Titre vide -> null
 
     try {  
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&include_adult=false&language=fr-FR`;  
-      // URL TMDB pour rechercher un film
+      // URL API TMDB
 
       const res = await fetch(url);  
-      // Envoi de la requête
+      // Requête fetch
 
       if (!res.ok) return null;  
-      // Si erreur -> retour null
+      // Si erreur -> null
 
       const json = await res.json();  
-      // Parse JSON de la réponse
+      // Parse JSON
 
       return (json.results && json.results.length > 0) ? json.results : null;  
-      // Retourne tableau résultats ou null si vide
+      // Retourne résultats ou null
     } catch (err) {  
       console.error('TMDB search error', err);  
       return null;  
-      // En cas d'erreur -> log et retour null
+      // En cas d'erreur -> log et null
     }  
   }  
 
   // ---------- Slider films page accueil ----------
   const moviesList = [  
-    "Les Évadés (The Shawshank Redemption)",  
-    "Interstellar",  
-    "Le Voyage de Chihiro",  
-    "The Dark Knight",  
-    "The Green Mile",  
-    "Parasite",  
     "Le Seigneur des anneaux : Le Retour du roi",  
-    "Your Name.",  
+    "Le Seigneur des anneaux : La Communauté de l'anneau (The Lord of the Rings: The Fellowship of the Ring)",  
+    "Le Seigneur des anneaux : Les Deux Tours (The Lord of the Rings: The Two Towers)",  
     "Forrest Gump",  
-    "Fight Club"  
+    "La Ligne verte",  
+    "Le Parrain (The Godfather)",  
+    "Les Évadés (The Shawshank Redemption)",  
+    "Le Seigneur des anneaux : le retour du roi",  
+    "The Dark Knight : Le Chevalier noir (The Dark Knight)"  
   ];  
   // Liste des films à afficher dans le slider
 
   async function loadHomeMovies() {  
     const slider = qs('#slider-films');  
     if (!slider) return;  
-    // Si pas de slider -> quitter
+    // Pas de slider -> quitter
 
     const listEl = qs('#slider-films .splide__list');  
     if (!listEl) return;  
-    // Si pas de conteneur de slides -> quitter
+    // Pas de conteneur -> quitter
 
     listEl.innerHTML = '';  
-    // Vider le slider avant de remplir
+    // Vider slider
 
     const slides = [];  
     for (const title of moviesList) {  
       const dataArr = await fetchMovieSearch(title);  
       if (!dataArr) continue;  
-      // Si aucun résultat -> passer au suivant
+      // Aucun résultat -> passer
 
       const data = dataArr[0];  
       // Premier résultat
 
       const posterUrl = data.poster_path ? (TMDB_IMG_PREFIX + data.poster_path) : 'film-default.jpg';  
-      // URL de l'affiche ou image par défaut
+      // URL affiche ou défaut
 
       const li = document.createElement('li');  
       li.className = 'splide__slide';  
-      // Crée la slide
+      // Crée slide
 
       li.innerHTML = `  
         <a href="cinemustFilm.html?id=${data.id}" class="slide-link" style="text-decoration:none;color:inherit;">  
@@ -231,7 +230,7 @@
       `;  
       listEl.appendChild(li);  
       slides.push(li);  
-      // Ajoute la slide au slider
+      // Ajoute slide au slider
     }  
 
     if (window.Splide) {  
@@ -242,54 +241,54 @@
         drag: 'free',  
         focus: 0,  
         pagination: false,  
-        arrows: true,  
+        arrows: false,  
         breakpoints: {1024:{perPage:3},768:{perPage:2},480:{perPage:1}}  
       });  
       splide.mount();  
       let current = 0;  
       const total = slides.length || 1;  
       setInterval(() => { current = (current + 1) % total; splide.go(current); }, 3000);  
-      // Slider automatique toutes les 3 secondes
+      // Animation automatique toutes les 3s
     } else console.warn("Splide non chargé : le slider n'aura pas d'animations.");  
   }  
 
   // ---------- Page résultat TMDB ----------
   async function loadResultPage() {  
     const resultsEl = qs('#results');  
-    // Conteneur où afficher les résultats
+    // Conteneur résultats
 
     if (!resultsEl) return;  
-    // Si pas de conteneur -> quitter
+    // Pas de conteneur -> quitter
 
     const params = new URLSearchParams(window.location.search);  
-    // Récupère les paramètres GET de l'URL
+    // Récupère paramètres GET
 
     const query = params.get('q') || params.get('movie') || '';  
-    // Récupère la valeur recherchée
+    // Récupère valeur recherchée
 
     if (!query.trim()) { safeText(resultsEl, "Aucun film spécifié."); return; }  
-    // Si rien -> message et quitter
+    // Aucun query -> message
 
     safeText(resultsEl, "Chargement...");  
-    // Message pendant le fetch
+    // Message pendant fetch
 
     const movies = await fetchMovieSearch(query);  
     if (!movies) { safeText(resultsEl, "Aucun film trouvé."); return; }  
-    // Si aucun film trouvé -> message et quitter
+    // Si aucun film -> message
 
     resultsEl.innerHTML = "";  
-    // Vide le conteneur avant d'ajouter les résultats
+    // Vide conteneur
 
     movies.forEach(movie => {  
       const link = document.createElement("a");  
       link.href = `cinemustFilm.html?id=${movie.id}`;  
       link.style.textDecoration = "none";  
       link.style.color = "inherit";  
-      // Crée un lien cliquable vers la page film
+      // Lien vers page film
 
       const card = document.createElement("div");  
       card.className = "movie-card";  
-      // Crée la carte film
+      // Carte film
 
       const posterImg = document.createElement("img");  
       posterImg.className = "movie-poster";  
@@ -308,17 +307,17 @@
 
       link.appendChild(card);  
       resultsEl.appendChild(link);  
-      // Ajoute la carte dans le lien puis dans le conteneur
+      // Ajoute carte au lien et au conteneur
     });  
   }  
 
   // ---------- DOM ready ----------
   document.addEventListener('DOMContentLoaded', () => {  
     initSidePanel();  
-    // Initialisation panneau latéral
+    // Initialise panneau latéral
 
     initBoxHeadings();  
-    // Initialisation toggles accessibles
+    // Initialise toggles accessibles
 
     const logo = qs('#image-responsive');  
     if (logo) {  
@@ -328,10 +327,11 @@
     }  
 
     if (qs('#slider-films')) loadHomeMovies();  
-    // Si présence du slider -> charger films
+    // Si slider présent -> charger films
 
     loadResultPage();  
-    // Charger les résultats si page résultat
+    // Charger résultats si page résultat
   });  
 
 })();  
+// Fin de l'IIFE
