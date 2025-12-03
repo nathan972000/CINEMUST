@@ -1,272 +1,355 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Reset global : enlever marges et paddings par défaut, box-sizing pour inclure padding et border dans width/height */
+* { 
+    margin: 0; /* Supprime toutes les marges par défaut */
+    padding: 0; /* Supprime tous les paddings par défaut */
+    box-sizing: border-box; /* Inclut padding et border dans la taille des éléments */
+}
 
+/* Styles du corps de la page */
 body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 30px;
-    padding-left: 180px;
-    background: linear-gradient(180deg, #000000 0%, #3b0066 100%);
-    color: #f2f2f2;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
+    min-height: 100vh; /* Hauteur minimale = hauteur de la fenêtre */
+    margin: 0; /* Pas de marge autour du body */
+    padding: 30px; /* Padding général de 30px */
+    padding-left: 180px; /* Padding à gauche pour laisser de l’espace pour le menu fixe */
+    background: linear-gradient(180deg, #000000 0%, #3b0066 100%); /* Dégradé de fond du haut noir au bas violet */
+    color: #f2f2f2; /* Couleur du texte par défaut */
+    font-family: Arial, sans-serif; /* Police par défaut */
+    display: flex; /* Utilisation du flex pour aligner les enfants */
+    flex-direction: column; /* Orientation des enfants en colonne */
+    align-items: flex-start; /* Alignement à gauche */
+    position: relative; /* Position relative pour positionner des éléments absolus enfants */
 }
 
-/* overrides to use the imported fonts */
-body { font-family: 'Lato', sans-serif; }
+/* Override pour utiliser la police importée Google Lato */
+body { 
+    font-family: 'Lato', sans-serif; /* Remplace la police précédente par Lato */
+}
 
+/* Titre principal */
 #titre-principal {
-    font-family: serif;
-    color: #ffd6ff;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.2rem;
-    align-self: center;
-    width: 100%;
+    font-family: serif; /* Police serif pour ce titre */
+    color: #ffd6ff; /* Couleur rose clair */
+    text-align: center; /* Centrer le texte horizontalement */
+    margin-bottom: 30px; /* Espace en dessous du titre */
+    font-size: 2.2rem; /* Taille du texte */
+    align-self: center; /* Centrer le titre horizontalement dans le flex container */
+    width: 100%; /* Largeur 100% pour centrer correctement */
 }
 
+/* Logo en haut à droite */
 #image-responsive {
-    position: absolute; top: 20px; right: 30px; width: 100px; height: auto;
-    border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); display: block; margin: 0;
+    position: absolute; /* Position absolue par rapport au body */
+    top: 20px; /* Décalage depuis le haut */
+    right: 30px; /* Décalage depuis la droite */
+    width: 100px; /* Largeur fixe */
+    height: auto; /* Hauteur automatique pour garder les proportions */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6); /* Ombre autour du logo */
+    display: block; /* S’assure que c’est un block */
+    margin: 0; /* Pas de marge */
 }
 
+/* Barre de recherche */
 #maRecherche {
-    padding: 20px 36px;
-    border-radius: 25px;
-    font-size: 1.5rem;
-    width: min(920px, 95%);
-    max-width: 920px;
-    background-color: rgba(255,255,255,0.08);
-    color: #f2f2f2;
-    box-shadow: inset 0 2px 8px rgba(0,0,0,0.32);
-    transition: box-shadow .18s ease, transform .08s ease;
-    display: block;
-    line-height: 1.25;
-    margin-top: 60px;
+    padding: 20px 36px; /* Padding interne du champ */
+    border-radius: 25px; /* Coins arrondis */
+    font-size: 1.5rem; /* Taille du texte */
+    width: min(920px, 95%); /* Largeur maximale 920px, sinon 95% de l’écran */
+    max-width: 920px; /* Maximum 920px */
+    background-color: rgba(255,255,255,0.08); /* Fond légèrement transparent */
+    color: #f2f2f2; /* Texte blanc clair */
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.32); /* Ombre interne */
+    transition: box-shadow .18s ease, transform .08s ease; /* Transition animation légère */
+    display: block; /* Affichage en block */
+    line-height: 1.25; /* Hauteur de ligne */
+    margin-top: 60px; /* Espace au-dessus */
 }
 
+/* Bouton de recherche */
 button {
-    padding: 20px 20px;
-    border-radius: 50px;
-    border: none;
-    background-color: rgba(255,255,255,0.08);
-    color: white;
-    cursor: pointer;
-    margin-left: 8px;
-    font-size: 1.4rem;
-    margin-top: 60px;
+    padding: 20px 20px; /* Padding du bouton */
+    border-radius: 50px; /* Rond */
+    border: none; /* Pas de bordure */
+    background-color: rgba(255,255,255,0.08); /* Fond semi-transparent */
+    color: white; /* Couleur du texte */
+    cursor: pointer; /* Curseur pointer au hover */
+    margin-left: 8px; /* Petit espace à gauche */
+    font-size: 1.4rem; /* Taille du texte */
+    margin-top: 60px; /* Même espacement que le champ recherche */
 }
 
+/* Effet au survol du bouton */
 button:hover {
-    background-color: #9a5bd6;
+    background-color: #9a5bd6; /* Change la couleur de fond au hover */
 }
 
-form { width: 100%; display:flex; justify-content:center; }
-form div { width: 100%; max-width: 920px; display:flex; gap:8px; align-items:center; }
+/* Formulaire */
+form { 
+    width: 100%; /* Largeur totale */
+    display:flex; /* Flex pour aligner input et bouton */
+    justify-content:center; /* Centrer horizontalement */
+}
 
-/* Splide / slider */
-#boxes-container { display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%; }
+/* Div interne au formulaire */
+form div { 
+    width: 100%; /* Largeur maximale */
+    max-width: 920px; /* Limite la largeur */
+    display:flex; /* Flex pour input et bouton */
+    gap:8px; /* Espace entre input et bouton */
+    align-items:center; /* Aligner verticalement */
+}
 
+/* Conteneur Splide / Slider */
+#boxes-container { 
+    display: flex; /* Flex container */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: flex-start; /* Aligner en haut */
+    gap: 20px; /* Espace entre les slides */
+    width: 100%; /* Largeur totale */
+}
+
+/* Slider films */
 #slider-films {
-  width: 90%;
-  margin: 150px auto;
+  width: 90%; /* Largeur du slider */
+  margin: 150px auto; /* Centrer horizontalement et marge verticale */
 }
 
+/* Animation automatique du slider */
 #slider-films .splide__list {
-  animation: auto-move 10s linear infinite;
+  animation: auto-move 10s linear infinite; /* Animation en continu de gauche à droite */
 }
 
+/* Pause de l’animation au hover */
 #slider-films .splide__list:hover {
-  animation-play-state: paused;
+  animation-play-state: paused; /* Stoppe l’animation quand on survole */
 }
 
+/* Définition des keyframes pour l’animation auto-move */
 @keyframes auto-move {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  0%   { transform: translateX(0); } /* Début : position normale */
+  100% { transform: translateX(-100%); } /* Fin : décalage complet vers la gauche */
 }
+
+/* Images des slides */
 #slider-films .splide__slide img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  width: 100%; /* Prend toute la largeur */
+  height: auto; /* Hauteur automatique */
+  border-radius: 12px; /* Coins arrondis */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5); /* Ombre autour */
 }
 
-/* menu dots */
+/* Menu dots */
 #menu-dots{
-    position: fixed;
-    top: 22px;
-    left: 30px;
-    width: 30px;
-    height: 35px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    padding: 4px;
-    z-index: 30;
+    position: fixed; /* Fixé à l’écran */
+    top: 22px; /* Décalage du haut */
+    left: 30px; /* Décalage de gauche */
+    width: 30px; /* Largeur du bouton */
+    height: 35px; /* Hauteur du bouton */
+    background: transparent; /* Transparent */
+    border: none; /* Pas de bordure */
+    cursor: pointer; /* Curseur pointer */
+    display: flex; /* Flex pour aligner les points */
+    flex-direction: column; /* Colonne verticale */
+    justify-content: center; /* Centrer verticalement */
+    align-items: center; /* Centrer horizontalement */
+    gap: 4px; /* Espace entre les points */
+    padding: 4px; /* Padding interne */
+    z-index: 30; /* Au-dessus des autres éléments */
 }
+
+/* Points du menu dots */
 #menu-dots span {
-    display: block;
-    width: 6px;
-    height: 6px;
-    background: #ffd6ff;
-    border-radius: 50%;
+    display: block; /* Bloc pour prendre espace */
+    width: 6px; /* Largeur du point */
+    height: 6px; /* Hauteur du point */
+    background: #ffd6ff; /* Couleur rose */
+    border-radius: 50%; /* Rond */
 }
 
-/* side panel */
+/* Side panel */
 #side-panel{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 340px;
-    max-width: 92%;
-    background: linear-gradient(180deg, rgba(20,6,32,0.98), rgba(59,0,102,0.98));
-    box-shadow: 12px 0 40px rgba(0,0,0,0.6);
-    transform: translateX(-100%);
-    transition: transform 0.32s cubic-bezier(.2,.9,.2,1);
-    z-index: 40;
-    padding: 18px;
-    overflow-y: auto;
+    position: fixed; /* Fixé à l’écran */
+    top: 0; /* Depuis le haut */
+    left: 0; /* Depuis la gauche */
+    height: 100vh; /* Hauteur pleine */
+    width: 340px; /* Largeur fixe */
+    max-width: 92%; /* Limite sur petits écrans */
+    background: linear-gradient(180deg, rgba(20,6,32,0.98), rgba(59,0,102,0.98)); /* Dégradé de fond */
+    box-shadow: 12px 0 40px rgba(0,0,0,0.6); /* Ombre sur le côté */
+    transform: translateX(-100%); /* Caché à gauche */
+    transition: transform 0.32s cubic-bezier(.2,.9,.2,1); /* Animation de translation */
+    z-index: 40; /* Au-dessus du reste */
+    padding: 18px; /* Padding interne */
+    overflow-y: auto; /* Scroll vertical si besoin */
 }
 
-#side-panel[data-open="true"]{ transform: translateX(0); }
+/* Side panel ouvert */
+#side-panel[data-open="true"]{ transform: translateX(0); } /* Quand ouvert, translation à 0 */
 
+/* Bouton fermer side panel */
 #side-panel-close{
-    position: fixed;
-    top: -80px;
-    left: 280px;
-    background: transparent;
-    color: #fff;
-    border: none;
-    font-size: 2.5rem;
-    cursor: pointer;
-    z-index: 60;
+    position: fixed; /* Fixé par rapport à la fenêtre */
+    top: -80px; /* Décalage vers le haut (hors écran) */
+    left: 280px; /* Décalage à gauche */
+    background: transparent; /* Pas de fond */
+    color: #fff; /* Couleur blanche */
+    border: none; /* Pas de bordure */
+    font-size: 2.5rem; /* Taille du X */
+    cursor: pointer; /* Curseur pointer */
+    z-index: 60; /* Au-dessus du panneau */
 }
 
-#side-panel-content { margin-top: 48px; color: #f2f2f2; }
-#side-panel-title { margin: 0 0 12px 0; color: #ffd6ff; font-family: 'Montserrat', sans-serif; cursor: pointer; user-select: none; }
+/* Contenu side panel */
+#side-panel-content { 
+    margin-top: 48px; /* Espace depuis le haut */
+    color: #f2f2f2; /* Couleur du texte */
+}
 
+/* Titre side panel */
+#side-panel-title { 
+    margin: 0 0 12px 0; /* Marge inférieure */
+    color: #ffd6ff; /* Couleur rose */
+    font-family: 'Montserrat', sans-serif; /* Police Montserrat */
+    cursor: pointer; /* Curseur pointer */
+    user-select: none; /* Texte non sélectionnable */
+}
+
+/* Liens dans side panel */
 #link-intro, #link-about {
-    margin: 12px 0 6px 0;
-    color: #ffd6ff;
-    cursor: pointer;
-    font-weight: 700;
+    margin: 12px 0 6px 0; /* Marges haut et bas */
+    color: #ffd6ff; /* Couleur texte */
+    cursor: pointer; /* Curseur pointer */
+    font-weight: 700; /* Gras */
 }
 
+/* Contenu extensible (introduction et à propos) */
 #content-intro, #content-about {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height .28s ease, opacity .22s ease, margin .22s ease;
-    margin: 0;
-    color: rgba(230,230,230,0.95);
+    max-height: 0; /* Caché par défaut */
+    overflow: hidden; /* Pas de scroll visible */
+    opacity: 0; /* Transparent */
+    transition: max-height .28s ease, opacity .22s ease, margin .22s ease; /* Animation ouverture */
+    margin: 0; /* Pas de marge */
+    color: rgba(230,230,230,0.95); /* Couleur texte */
 }
+
+/* Contenu ouvert */
 #content-intro[data-open="true"], #content-about[data-open="true"] {
-    max-height: 600px;
-    opacity: 1;
-    margin-top: 8px;
+    max-height: 600px; /* Hauteur max pour voir le texte */
+    opacity: 1; /* Visible */
+    margin-top: 8px; /* Espace au dessus */
 }
 
-/* Result page styles */
+/* Résultats de recherche */
 #result-container {
-    text-align: center;
-    margin-top: 40px;
-    padding: 20px;
+    text-align: center; /* Centrer texte */
+    margin-top: 40px; /* Espace du haut */
+    padding: 20px; /* Padding interne */
 }
+
 #poster {
-    margin-top: 20px;
-    border-radius: 10px;
-    max-width: 300px;
-    left: 50%;
-    transform: translateX(50%);
-    justify-content: center;
-    align-items: center;
+    margin-top: 20px; /* Espace au dessus */
+    border-radius: 10px; /* Coins arrondis */
+    max-width: 300px; /* Largeur max */
+    left: 50%; /* Centrer horizontal */
+    transform: translateX(50%); /* Ajustement centré */
+    justify-content: center; /* Centrer enfants */
+    align-items: center; /* Centrer verticalement */
 }
+
 #message {
-    color: red;
-    font-size: 1.3rem;
-    margin-top: 20px;
+    color: red; /* Texte rouge */
+    font-size: 1.3rem; /* Taille texte */
+    margin-top: 20px; /* Espace au dessus */
 }
 
-/* footer */
+/* Footer */
 footer {
-    background: linear-gradient(180deg, rgba(59,0,102,0.8), rgba(0,0,0,0.8));
-    text-align: center;
-    padding: 30px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    width: 100%;
-    color: #f2f2f2;
-    margin-top: auto;
+    background: linear-gradient(180deg, rgba(59,0,102,0.8), rgba(0,0,0,0.8)); /* Dégradé violet/noir */
+    text-align: center; /* Centrer texte */
+    padding: 30px; /* Padding interne */
+    border-top: 1px solid rgba(255,255,255,0.1); /* Ligne supérieure */
+    width: 100%; /* Largeur totale */
+    color: #f2f2f2; /* Couleur du texte */
+    margin-top: auto; /* Positionne le footer en bas */
 }
-footer p { margin: 0 0 10px 0; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
-footer nav a { margin: 0 10px; text-decoration: none; color: #ffd6ff; font-weight: 500; transition: color 0.2s ease; }
-footer nav a:hover { color: #9a5bd6; }
 
-/* responsive */
+footer p { 
+    margin: 0 0 10px 0; /* Marge inférieure */
+    font-size: 0.9rem; /* Taille texte */
+    color: rgba(255,255,255,0.8); /* Texte semi-transparent */
+}
+
+footer nav a { 
+    margin: 0 10px; /* Espace horizontal entre liens */
+    text-decoration: none; /* Pas de soulignement */
+    color: #ffd6ff; /* Couleur texte rose */
+    font-weight: 500; /* Poids moyen */
+    transition: color 0.2s ease; /* Transition couleur */
+}
+
+footer nav a:hover { 
+    color: #9a5bd6; /* Couleur au hover */
+}
+
+/* Responsive : écrans <= 768px */
 @media screen and (max-width: 768px) {
-    body { padding: 20px 30px; }
-    #text-box-1, #text-box-2 { width: 100%; max-width: 700px; margin: 10px 0; }
-    #image-responsive { position: static; width: 100%; max-width: 320px; margin: 10px auto 24px; }
-    footer { padding: 15px; }
-    footer nav a { margin: 0 5px; font-size: 0.9rem; }
+    body { padding: 20px 30px; } /* Réduction padding */
+    #text-box-1, #text-box-2 { width: 100%; max-width: 700px; margin: 10px 0; } /* Text boxes responsive */
+    #image-responsive { position: static; width: 100%; max-width: 320px; margin: 10px auto 24px; } /* Logo repositionné */
+    footer { padding: 15px; } /* Footer réduit */
+    footer nav a { margin: 0 5px; font-size: 0.9rem; } /* Liens plus petits */
 }
 
+/* Responsive : écrans <= 480px */
 @media screen and (max-width: 480px){
-    #menu-dots { right: 18px; top: 14px; left: auto; }
-    #side-panel { width: 100%; height: 55vh; bottom: 0; top: auto; transform: translateY(100%); right: 0; border-top-left-radius: 12px; border-top-right-radius: 12px; }
-    #side-panel[data-open="true"]{ transform: translateY(0); }
-    #side-panel-close { left: auto; right: 12px; top: 8px; }
-    body { padding: 14px; }
-    #titre-principal { font-size: 1.6rem; margin-bottom: 12px; }
-    #text-box-1, #text-box-2 { padding: 14px; }
-    footer { padding: 10px; }
-    footer nav { display: block; }
-    footer nav a { display: block; margin: 5px 0; }
+    #menu-dots { right: 18px; top: 14px; left: auto; } /* Position menu dots */
+    #side-panel { width: 100%; height: 55vh; bottom: 0; top: auto; transform: translateY(100%); right: 0; border-top-left-radius: 12px; border-top-right-radius: 12px; } /* Side panel mobile */
+    #side-panel[data-open="true"]{ transform: translateY(0); } /* Ouvrir side panel */
+    #side-panel-close { left: auto; right: 12px; top: 8px; } /* Bouton fermer */
+    body { padding: 14px; } /* Réduction padding body */
+    #titre-principal { font-size: 1.6rem; margin-bottom: 12px; } /* Titre plus petit */
+    #text-box-1, #text-box-2 { padding: 14px; } /* Text boxes padding réduit */
+    footer { padding: 10px; } /* Footer réduit */
+    footer nav { display: block; } /* Liens en block */
+    footer nav a { display: block; margin: 5px 0; } /* Liens en block */
 }
 
-/* Résultats de recherche TMDB */
+/* Résultats TMDB */
 #results {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    margin-top: 30px;
+    display: flex; /* Flex container */
+    flex-wrap: wrap; /* Les résultats passent à la ligne si nécessaire */
+    gap: 16px; /* Espace entre les cards */
+    justify-content: center; /* Centrer horizontalement */
+    margin-top: 30px; /* Espace au dessus */
 }
 
 .movie-card {
-    width: 350px; /* agrandie */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255,255,255,0.05);
-    padding: 12px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 350px; /* Largeur card */
+    display: flex; /* Flex container */
+    flex-direction: column; /* Colonne */
+    align-items: center; /* Centrer enfants */
+    background: rgba(255,255,255,0.05); /* Fond semi-transparent */
+    padding: 12px; /* Padding interne */
+    border-radius: 12px; /* Coins arrondis */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* Ombre */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transition animation */
 }
 
 .movie-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transform: translateY(-4px); /* Déplacement vers le haut au hover */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6); /* Ombre plus prononcée */
 }
 
 .movie-poster {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    width: 100%; /* Largeur de l’image */
+    height: auto; /* Hauteur automatique */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5); /* Ombre */
 }
 
 .movie-title {
-    font-size: 1rem; /* un peu plus grand */
-    color: #ffd6ff;
-    text-align: center;
-    margin-top: 6px;
+    font-size: 1rem; /* Taille du texte */
+    color: #ffd6ff; /* Couleur rose clair */
+    text-align: center; /* Centré */
+    margin-top: 6px; /* Espace au dessus */
 }
