@@ -353,3 +353,13 @@ footer nav a:hover {
     text-align: center; /* Centré */
     margin-top: 6px; /* Espace au dessus */
 }
+
+.top-films-title {
+  max-width: 90%;          /* même largeur que le slider */
+  margin: 10px auto 5px auto;
+  color: #ffd6ff;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+
+  font-size: 2.2rem;
+}
