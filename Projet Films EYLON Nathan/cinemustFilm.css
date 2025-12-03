@@ -1,118 +1,150 @@
+/* --- CONTENEUR PRINCIPAL --- */
 #film-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  padding: 30px 0;
+  display: flex;               /* Utilise flexbox pour aligner enfants */
+  flex-wrap: wrap;             /* Permet de passer à la ligne si nécessaire */
+  justify-content: center;     /* Centre horizontalement les éléments */
+  gap: 40px;                   /* Espace entre les éléments */
+  padding: 40px 0;             /* Padding haut/bas de 40px, gauche/droite 0 */
 }
 
+/* --- AFFICHAGE DU POSTER --- */
 #film-left img {
-  width: 300px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  width: 400px;                /* Largeur fixe de l'image */
+  border-radius: 12px;         /* Coins arrondis */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5); /* Ombre portée */
 }
 
+/* --- CONTENU DU FILM --- */
 #film-right {
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  color: #f2f2f2;
+  flex-grow: 1;                /* Prend tout l'espace restant */
+  min-width: 350px;            /* Largeur minimale */
+  display: flex;               /* Flexbox pour son contenu */
+  flex-direction: column;      /* Les enfants en colonne */
+  gap: 16px;                   /* Espace entre enfants */
+  color: #f2f2f2;             /* Couleur du texte */
 }
 
 #film-right h1 {
-  font-size: 2rem;
-  color: #ffd6ff;
+  font-size: 2.5rem;           /* Taille du titre */
+  color: #ffd6ff;              /* Couleur du titre */
 }
 
 #film-right p {
-  font-size: 1.1rem;
-  line-height: 1.4;
+  font-size: 1.3rem;           /* Taille du texte */
+  line-height: 1.5;            /* Hauteur de ligne */
+}
+
+/* --- META + BOUTON --- */
+#movie-meta {
+  display: flex;               /* Flexbox pour aligner les éléments */
+  align-items: flex-start;     /* Aligne en haut */
+  gap: 12px;                   /* Espace entre éléments */
+}
+
+#allocine-btn {
+  background-color: #FFCC00;   /* Couleur de fond */
+  color: #000;                 /* Couleur du texte */
+  font-weight: bold;           /* Texte en gras */
+  font-size: 1.1rem;           /* Taille du texte */
+  padding: 8px 14px;           /* Padding interne */
+  border: none;                /* Pas de bordure */
+  border-radius: 6px;          /* Coins arrondis */
+  cursor: pointer;             /* Curseur pointeur */
+  transition: all 0.3s ease;  /* Animation lors du hover */
+  margin-top: -3px;            /* Ajustement vertical */
+}
+
+#allocine-btn:hover {
+  background-color: #e6b800;   /* Couleur au survol */
+  transform: translateY(-1px); /* Légère translation pour effet */
+}
+
+/* --- TRAILER --- */
+#movie-trailer-container {
+  width: 100%;                 /* Largeur 100% du conteneur parent */
+  max-width: 90%;              /* Max largeur 90% */
+  margin-top: 20px;            /* Marge au-dessus */
 }
 
 #movie-trailer-container iframe {
-  width: 100%;
-  max-width: 560px;
-  height: 315px;
-  border-radius: 12px;
-  margin-top: 20px;
+  width: 100%;                 /* Largeur de l'iframe 100% */
+  height: 450px;               /* Hauteur fixe */
+  border: none;                /* Pas de bordure */
+  border-radius: 12px;         /* Coins arrondis */
 }
 
-@media screen and (max-width: 768px) {
-  #film-container { flex-direction: column; align-items: center; }
-  #film-left img { width: 80%; max-width: 320px; }
-  #film-right { max-width: 90%; }
-}
-
-/* --- Style pour la section acteurs --- */
+/* --- ACTEURS --- */
 #movie-actors {
-  margin-top: 20px;
+  margin-top: 30px;            /* Marge au-dessus */
 }
 
 #movie-actors h2 {
-  color: #ffd6ff;
-  margin-bottom: 10px;
+  color: #ffd6ff;              /* Couleur titre */
+  font-size: 1.5rem;           /* Taille du texte */
+  margin-bottom: 12px;         /* Marge en dessous */
 }
 
+/* --- LISTE DES ACTEURS (sans scroll) --- */
 .actors-list {
-  display: flex;           
-  gap: 16px;               
-  overflow-x: auto;        
-  padding-bottom: 10px;
-  scroll-behavior: smooth;
-  flex-wrap: nowrap;       
-}
-
-/* Scrollbar discrète et transparente */
-.actors-list::-webkit-scrollbar {
-  height: 6px;
-}
-
-.actors-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
-}
-
-.actors-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 214, 255, 0.2);
-  border-radius: 3px;
-}
-
-.actors-list::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 214, 255, 0.4);
-}
-
-/* Firefox */
-.actors-list {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,214,255,0.2) rgba(255,255,255,0.05);
+  display: flex;               /* Flexbox pour les cartes */
+  gap: 20px;                   /* Espace entre cartes */
+  flex-wrap: wrap;             /* Passe à la ligne si nécessaire */
 }
 
 .actor-card {
-  flex: 0 0 auto;
-  width: 160px;         /* avant : 120px */
-  text-align: center;
-  background: rgba(255,255,255,0.05);
-  padding: 12px;        /* un peu plus d’espace */
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  flex: 0 0 auto;              /* Taille fixe pour chaque carte */
+  width: 200px;                /* Largeur carte */
+  text-align: center;          /* Centre le texte */
+  background: rgba(255,255,255,0.05); /* Fond légèrement transparent */
+  padding: 14px;               /* Padding interne */
+  border-radius: 10px;         /* Coins arrondis */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* Ombre portée */
 }
 
 .actor-card img {
-  width: 100%;
-  height: 200px;        /* avant : 150px */
-  object-fit: cover;
-  border-radius: 8px;
+  width: 100%;                 /* Image pleine largeur */
+  height: 250px;               /* Hauteur fixe */
+  object-fit: cover;           /* Recadrage pour couvrir */
+  border-radius: 8px;          /* Coins arrondis */
 }
 
 .actor-name {
-  font-weight: bold;
-  margin-top: 6px;      /* un peu plus d’espace */
-  font-size: 1rem;      /* légèrement plus grand */
-  color: #ffd6ff;
+  font-weight: bold;           /* Texte en gras */
+  margin-top: 8px;             /* Marge au-dessus */
+  font-size: 1.2rem;           /* Taille du texte */
+  color: #ffd6ff;              /* Couleur texte */
 }
 
 .actor-role {
-  font-size: 1rem;      /* avant : 0.9rem */
-  opacity: 0.9;
+  font-size: 1.1rem;           /* Taille du texte */
+  opacity: 0.9;                /* Légère transparence */
+}
+
+/* --- RESPONSIVE --- */
+@media screen and (max-width: 1024px) {
+  #film-left img { width: 350px; }                 /* Réduit le poster */
+  #film-right h1 { font-size: 2.2rem; }           /* Réduit le titre */
+  #film-right p { font-size: 1.2rem; }            /* Réduit le texte */
+  #allocine-btn { font-size: 1rem; padding: 7px 12px; } /* Réduit bouton */
+  #movie-trailer-container iframe { height: 400px; }    /* Hauteur trailer */
+  .actor-card { width: 180px; }                   /* Réduit carte acteur */
+  .actor-card img { height: 220px; }             /* Réduit image acteur */
+  #movie-actors h2 { font-size: 1.3rem; }        /* Réduit titre acteurs */
+}
+
+@media screen and (max-width: 768px) {
+  #film-container {
+    flex-direction: column;   /* Passage en colonne */
+    align-items: center;      /* Centre horizontalement */
+    gap: 30px;                /* Réduit espacement */
+  }
+  #film-left img { width: 80%; max-width: 320px; } /* Poster responsive */
+  #film-right { max-width: 90%; }                  /* Limite largeur contenu */
+  #movie-trailer-container { max-width: 100%; }    /* Trailer responsive */
+  .actor-card { width: 160px; }                   /* Carte acteur réduite */
+  .actor-card img { height: 200px; }             /* Image acteur réduite */
+  #film-right h1 { font-size: 1.8rem; }          /* Titre réduit */
+  #film-right p { font-size: 1.1rem; }           /* Texte réduit */
+  #allocine-btn { font-size: 0.95rem; padding: 6px 10px; } /* Bouton réduit */
+  #movie-actors h2 { font-size: 1.2rem; }        /* Titre acteurs réduit */
 }
