@@ -1,76 +1,91 @@
-<!DOCTYPE html>
-<html lang="fr" class="scroll">
+<!DOCTYPE html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr" class="scroll"> <!-- Langue française, classe pour style scroll si nécessaire -->
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Film</title>
+  <meta charset="utf-8" /> <!-- Encodage des caractères en UTF-8 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" /> <!-- Responsive design pour mobiles et tablettes -->
+  <title>Film</title> <!-- Titre de la page affiché dans l’onglet du navigateur -->
 
-  <!-- CSS global -->
-  <link rel="stylesheet" href="cinemustAcceuil.css">
-  <!-- CSS dédié film -->
-  <link rel="stylesheet" href="cinemustFilm.css">
+  <!-- === CSS global pour l'ensemble du site === -->
+  <link rel="stylesheet" href="cinemustAcceuil.css"> <!-- Style commun à tout le site -->
 
-  <!-- Polices Google -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Lato:wght@400;700&family=Cinzel+Decorative&display=swap" rel="stylesheet">
+  <!-- === CSS spécifique à la page film === -->
+  <link rel="stylesheet" href="cinemustFilm.css"> <!-- Styles propres à la page film -->
+
+  <!-- === Polices Google === -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Préconnexion pour améliorer le chargement des polices -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Préconnexion avec CORS -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Lato:wght@400;700&family=Cinzel+Decorative&display=swap" rel="stylesheet"> <!-- Import des polices Montserrat, Lato et Cinzel Decorative -->
 </head>
 <body>
 
-  <!-- Logo -->
-  <img id="image-responsive" src="Icons/Cinemust.png" alt="Logo">
+  <!-- === Logo cliquable pour retour accueil === -->
+  <img id="image-responsive" src="Icons/Cinemust.png" alt="Logo"> <!-- Logo du site, cliquable via JS pour revenir à l’accueil -->
 
-  <!-- Menu dots -->
-  <button id="menu-dots" aria-label="Ouvrir menu">    
-    <span id="dot-1"></span>
-    <span id="dot-2"></span>
-    <span id="dot-3"></span>
+  <!-- === Bouton menu dots pour panneau latéral === -->
+  <button id="menu-dots" aria-label="Ouvrir menu"> <!-- Bouton pour ouvrir/fermer le menu latéral -->
+    <span id="dot-1"></span> <!-- Premier point du bouton menu -->
+    <span id="dot-2"></span> <!-- Deuxième point du bouton menu -->
+    <span id="dot-3"></span> <!-- Troisième point du bouton menu -->
   </button>
 
-<aside id="side-panel" role="dialog" aria-hidden="true" aria-labelledby="side-panel-title">
-  <!-- Bouton de fermeture à l'intérieur -->
-  <button id="side-panel-close" aria-label="Fermer panneau">×</button>
+  <!-- === Panneau latéral / menu === -->
+  <aside id="side-panel" role="dialog" aria-hidden="true" aria-labelledby="side-panel-title"> <!-- Panneau latéral masqué par défaut -->
+    <!-- Bouton fermer le panneau -->
+    <button id="side-panel-close" aria-label="Fermer panneau">×</button>
 
-  <div id="side-panel-content">
-    <h2 id="side-panel-title">CineMust</h2>
+    <!-- Contenu du panneau -->
+    <div id="side-panel-content">
+      <!-- Titre du panneau -->
+      <h2 id="side-panel-title">CineMust</h2>
 
-    <h4 id="link-intro" role="button" tabindex="0">Introduction</h4>
-    <div id="content-intro" aria-hidden="true">
-      <p>Bienvenue sur CineMust.</p>
+      <!-- Lien vers la section introduction -->
+      <h4 id="link-intro" role="button" tabindex="0">Introduction</h4> <!-- h4 cliquable / accessible au clavier -->
+      <div id="content-intro" aria-hidden="true"> <!-- Contenu caché par défaut -->
+        <p>Bienvenue sur CineMust.</p> <!-- Texte de présentation -->
+      </div>
+
+      <!-- Lien vers la section À propos -->
+      <h4 id="link-about" role="button" tabindex="0">À propos</h4> <!-- h4 cliquable / accessible au clavier -->
+      <div id="content-about" aria-hidden="true"> <!-- Contenu caché par défaut -->
+        <p>Site de films TMDB-like.</p> <!-- Description du site -->
+      </div>
     </div>
+  </aside>
 
-    <h4 id="link-about" role="button" tabindex="0">À propos</h4>
-    <div id="content-about" aria-hidden="true">
-      <p>Site de films TMDB-like.</p>
-    </div>
-  </div>
-</aside>
-
-
-  <!-- Contenu principal -->
-  <main id="film-container">
+  <!-- === Contenu principal : Film === -->
+  <main id="film-container"> <!-- Conteneur principal affichant le film -->
+    <!-- Section gauche : affiche le poster du film -->
     <div id="film-left">
-      <img id="movie-poster" src="" alt="Poster du film">
+      <img id="movie-poster" src="" alt="Poster du film"> <!-- Image dynamique remplie par JS -->
     </div>
+
+    <!-- Section droite : informations du film -->
     <div id="film-right">
-      <h1 id="movie-title">Titre</h1>
-      <p id="movie-note">Note :</p>
-      <p id="movie-synopsis">Synopsis :</p>
-      <div id="movie-actors"><h2>Acteurs</h2><div class="actors-list"></div></div>
-      <div id="movie-trailer-container"></div>
+      <!-- Titre du film -->
+      <h1 id="movie-title">Titre</h1> <!-- Dynamique, remplacé par JS -->
+
+      <!-- Note et bouton AlloCiné -->
+      <div id="movie-meta">
+        <p id="movie-note">Note :</p> <!-- Note du film affichée par JS -->
+        <button id="allocine-btn">Voir sur AlloCiné</button> <!-- Lien vers la page AlloCiné -->
+      </div>
+
+      <!-- Synopsis -->
+      <p id="movie-synopsis">Synopsis :</p> <!-- Synopsis dynamique rempli par JS -->
+
+      <!-- Section acteurs -->
+      <div id="movie-actors">
+        <h2>Acteurs</h2> <!-- Titre section acteurs -->
+        <div class="actors-list"></div> <!-- Liste dynamique des acteurs remplie par JS -->
+      </div>
+
+      <!-- Section trailer -->
+      <div id="movie-trailer-container"></div> <!-- Trailer du film intégré par JS -->
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 CineMust</p>
-    <nav>
-      <a href="cinemustAcceuil.html">Accueil</a>
-    </nav>
-  </footer>
-
-  <!-- JS -->
-  <script src="cinemust.js"></script>
-  <script src="cinemustFilm.js"></script>
+  <!-- === Scripts JS === -->
+  <script src="cinemust.js"></script> <!-- JS global pour site et menu -->
+  <script src="cinemustFilm.js"></script> <!-- JS spécifique à la page film -->
 </body>
 </html>
